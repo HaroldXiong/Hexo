@@ -47,3 +47,6 @@ Temporary Items
 .jpg
 .exe
 .mp3
+
+# .git
+/*/.deploy_git/*
