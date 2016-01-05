@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="/img/f.png">
+  
+  <title>OpenWrt + ShadowSocks 实现路由器自动代理 | Shintaku&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="暑假剁手了一台RMBP但没有以太网接口，为了省钱就需要一个无线路由器，之前曾了解到路由器可以刷OpenWrt后装上ShadowSocks实现自动科学上网，于是就在集训的时候从马云家买了一个二手的TP-Link TL-WR703N刷上OpenWrt在机房给笔记本供网。
+
+由于这货只有一个网口，当路由器自动获取IP地址后，就进不去192.168.1.1的管理界面了，虽然能上网，但每次换网线接头的时候都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenWrt + ShadowSocks 实现路由器自动代理">
+<meta property="og:url" content="http://www.shintaku.cc/2015/12/12/openwrt/index.html">
+<meta property="og:site_name" content="Shintaku's Blog">
+<meta property="og:description" content="暑假剁手了一台RMBP但没有以太网接口，为了省钱就需要一个无线路由器，之前曾了解到路由器可以刷OpenWrt后装上ShadowSocks实现自动科学上网，于是就在集训的时候从马云家买了一个二手的TP-Link TL-WR703N刷上OpenWrt在机房给笔记本供网。
+
+由于这货只有一个网口，当路由器自动获取IP地址后，就进不去192.168.1.1的管理界面了，虽然能上网，但每次换网线接头的时候都">
+<meta property="og:image" content="http://www.shintaku.cc/img/opbanner.png">
+<meta property="og:updated_time" content="2015-12-27T16:26:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenWrt + ShadowSocks 实现路由器自动代理">
+<meta name="twitter:description" content="暑假剁手了一台RMBP但没有以太网接口，为了省钱就需要一个无线路由器，之前曾了解到路由器可以刷OpenWrt后装上ShadowSocks实现自动科学上网，于是就在集训的时候从马云家买了一个二手的TP-Link TL-WR703N刷上OpenWrt在机房给笔记本供网。
+
+由于这货只有一个网口，当路由器自动获取IP地址后，就进不去192.168.1.1的管理界面了，虽然能上网，但每次换网线接头的时候都">
+<link rel="publisher" href="114761524022260760000">
+  
+    <link rel="alternative" href="/atom.xml" title="Shintaku&#39;s Blog" type="application/atom+xml">
+  
+  
+    <meta name="google-site-verification" content="5mRgj8NanEMpGZuNfHNJNmH90RgNlrnJXsFlTaKD6Gs" />
+  
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <script src="/js/jquery-2.1.0.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+  <!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"><div id="banner-right"></div></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shintaku&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">お前ら知ってる！？30過ぎても童貞なら魔法使いになれるんだぜ～</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          
+            <a class="main-nav-link" href="/"><i class=fa-home title='Home'></i> Home</a>
+          
+        
+          
+            <a class="main-nav-link" href="/about"><i class=fa-user title='About'></i> About</a>
+          
+        
+          
+            <a class="main-nav-link" href="/archives"><i class=fa-archive title='Archives'></i> Archives</a>
+          
+        
+          
+            <a class="main-nav-link" href="/tags"><i class=fa-tags title='Tags'></i> Tags</a>
+          
+        
+          
+            <a class="main-nav-link" href="/picture"><i class=fa-camera title='Pictures'></i> Pictures</a>
+          
+        
+          
+            <a class="main-nav-link" href="/works"><i class=fa-trophy title='Works'></i> Works</a>
+          
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.shintaku.cc"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        
+          <section id="main"><article id="post-openwrt" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/12/openwrt/" class="article-date">
+  <time datetime="2015-12-12T04:12:12.000Z" itemprop="datePublished">2015-12-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner ">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="/img/opbanner.png" rel="gallery_ciizjmkbs000c9v681fyhi5d6">
+        <img src="/img/opbanner.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      OpenWrt + ShadowSocks 实现路由器自动代理
+    </h1>
+  
+
+      </header>
+        
+    <footer class="article-footer">
+      <a data-url="http://www.shintaku.cc/2015/12/12/openwrt/" data-id="ciizjmkbs000c9v681fyhi5d6" class="article-share-link">Share</a>
+      
+        <a href="http://www.shintaku.cc/2015/12/12/openwrt/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenWrt/">OpenWrt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ShadowSocks/">ShadowSocks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/科学上网/">科学上网</a></li></ul>
+
+    </footer>
+    <div class="article-entry " itemprop="articleBody">
+      
+          
+              <div id="toc" class="toc-article">
+              <h2 class="toc-title"><span>contents</span></h2>
+              
+                  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#刷入OpenWrt"><span class="toc-number">1.</span> <span class="toc-text">刷入OpenWrt</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-number">1.1.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#路由器"><span class="toc-number">1.1.1.</span> <span class="toc-text">路由器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#固件"><span class="toc-number">1.1.2.</span> <span class="toc-text">固件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境"><span class="toc-number">1.1.3.</span> <span class="toc-text">环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#刷入固件"><span class="toc-number">1.2.</span> <span class="toc-text">刷入固件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开启无线"><span class="toc-number">1.3.</span> <span class="toc-text">开启无线</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#必要软件"><span class="toc-number">2.</span> <span class="toc-text">必要软件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ShadowSocks"><span class="toc-number">2.1.</span> <span class="toc-text">ShadowSocks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6relayd"><span class="toc-number">2.2.</span> <span class="toc-text">6relayd</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置路由器"><span class="toc-number">3.</span> <span class="toc-text">配置路由器</span></a></li></ol>
+              
+              </div>
+          
+        
+          <p>暑假剁手了一台RMBP但没有以太网接口，为了省钱就需要一个无线路由器，之前曾了解到路由器可以刷<strong>OpenWrt</strong>后装上<strong>ShadowSocks</strong>实现自动科学上网，于是就在集训的时候从马云家买了一个二手的<a href="http://www.tp-link.com.cn/product_225.html" target="_blank" rel="external">TP-Link TL-WR703N</a>刷上OpenWrt在机房给笔记本供网。</p>
+<p><img src="/img/op703n.png" alt="TL-WR703N"></p>
+<p>由于这货只有一个网口，当路由器自动获取IP地址后，就进不去<a href="192.168.1.1">192.168.1.1</a>的管理界面了，虽然能上网，但每次换网线接头的时候都要捅菊花抹掉原来的设置。因此只有使用静态IP时才能正常使用这种路由器。这学期开学后现家里有一个<a href="http://www.netgear.com/home/products/networking/wifi-routers/wnr2200.aspx" target="_blank" rel="external">Netgear WNR2200</a>在吃灰，于是就把它拿到学校刷上了OpenWrt放宿舍给各种无线设备供网。</p>
+<p><img src="/img/op2200.png" alt="WNR2200"></p>
+<h1 id="刷入OpenWrt">刷入OpenWrt</h1><h2 id="准备工作">准备工作</h2><h3 id="路由器">路由器</h3><p>首先你要拥有一台可以刷入OpenWrt的路由器，至于OpenWrt支持那些设备，请到<a href="https://wiki.openwrt.org/toh/start" target="_blank" rel="external">Supported Devices</a>页面查看。本文以WNR2200为例。</p>
+<h3 id="固件">固件</h3><p>前往<a href="https://downloads.openwrt.org/latest/" target="_blank" rel="external">Download</a>下载最新的对应设备的固件。注意固件列表里一半会有两种后缀：<code>squashfs-factory.img</code>和<code>squashfs-sysupgrade.img</code>，如果是从原厂固件刷到OpenWrt请用前者，如果是从OpenWrt升级请用后者。还有一种可能文件名以<code>NA</code>结尾<del>，可能是代表<code>North America</code></del>，基本上与不带<code>NA</code>的没什么区别。</p>
+<h3 id="环境">环境</h3><p>还需要一台有以太网接口的电脑和一根网线，电脑操作系统不限，但是<em>Windows</em>需要提前开启<code>TFTP</code>（因为这个功能系统默认是关闭的），具体操作就是进入<code>控制面板</code>-<code>程序</code>-<code>程序和功能</code>，</p>
+<p><img src="/img/optftp.png" alt="开启TFTP"></p>
+<p>打开<code>打开或关闭Windows功能</code>窗口，在里面把<code>TFTP</code>挑上钩，之后就可以开始了。</p>
+<h2 id="刷入固件">刷入固件</h2><p><strong>刷机有风险，操作需谨慎！</strong><br><strong>刷机有风险，操作需谨慎！</strong><br><strong>刷机有风险，操作需谨慎！</strong><br><del>重要的事说三遍</del></p>
+<p>首先要将路由器与电脑用网线相连（在后面的设置中网线是必要的），然后进入到路由器管理界面。</p>
+<p>有的原厂固件是可以直接升级成OpenWrt的，因此首先进入路由器管理界面，找到固件升级的选项，选择下好的OpenWrt固件上传就可以了，我之前刷TL-WR703N时是可以直接上传的，上传完成重启后就算是刷完了。但我后来刷WNR2200时遇到了不认固件的情况（可能是因为原厂固件的版本问题），于是只好用<strong>TFTP</strong>的方式上传固件，这就是之前为什么要打开Windows中<code>TFTP</code>功能的原因。</p>
+<p>如果从原厂管理界面中直接上传固件成功，请直接进入下一节；若不认固件，请执行以下步骤：</p>
+<ul>
+<li><p>关闭路由器电源，用笔尖捅住“Restore Factory Settings”<del>菊花</del>键不放。</p>
+</li>
+<li><p>打开路由器电源，这时电源灯开始闪烁，这时依然<strong>不要松开</strong>RESET键，直到电源灯变为绿色长亮才可松手（可能有的路由器的表现不一样，达到类似效果即可），这时路由器已经进入了tftp模式。</p>
+</li>
+<li><p>将电脑的IP设为<code>192.168.1.2</code>，子网掩码设为<code>255.255.255.0</code>，将电脑与路由器的<strong>1号LAN口</strong>用网线相连。</p>
+</li>
+<li><p>从终端进入到要刷的固件所在目录中，假设固件名叫<code>openwrt.img</code>，如果在<em>Windows</em>下则使用命令：</p>
+<pre><code><span class="title">tftp</span> -i <span class="number">192.168.1.1</span> PUT <span class="string">"openwrt.img"</span>
+</code></pre><p>如果在<em>OS X</em>或<em>Linux</em>下则在终端里键入<code>tftp</code>，之后使用以下命令：</p>
+<pre><code>connect <span class="number">192.168</span>.1.1
+binary
+rexmt <span class="number">1</span>
+<span class="keyword">timeout</span> <span class="number">60</span>
+<span class="keyword">put</span> <span class="string">"openwrt.img"</span>
+</code></pre><p>稍等片刻，路由器的灯会出现各种变化，直到电源灯又恢复长绿状态（不同路由器或许不同），说明上传完成了。</p>
+</li>
+<li><p>重启路由器，不出意外之后应该可以通过网页访问<a href="192.168.1.1">192.168.1.1</a>的<code>LuCI</code>管理界面了。</p>
+</li>
+</ul>
+<h2 id="开启无线">开启无线</h2><p>较新的OpenWrt应该已经自带<code>LuCI</code>图形化界面了，因此直接浏览器打开<a href="192.168.1.1">192.168.1.1</a>就可以看到类似如下界面：</p>
+<p><img src="/img/opfirst.png" alt="LuCI"></p>
+<p>当然咯，第一次登入肯定是要先设密码的，毕竟也算是一个Linux系统：</p>
+<p><img src="/img/oppasswd.png" alt="更改密码"></p>
+<p>OpenWrt默认是关闭无线网络的，所以到<code>Network</code>-<code>Wifi</code>下面启用即可：</p>
+<p><img src="/img/opwifi.png" alt="启用Wifi"></p>
+<p>之后设置SSID和密码就可以通过无线方式连接了。</p>
+<h1 id="必要软件">必要软件</h1><p>既然要装上软件，自然要从互联网获取，那么路由器当然要联网咯。先到<code>Network</code>-<code>Interfaces</code>设置WAN口的上网方式，这点和普通路由器没有什么差别，这里不再赘述。</p>
+<p>如果觉得英文UI界面有阅读障碍，也可以到<code>System</code>-<code>Software</code>下找到一个叫<code>luci-i18n-base-zh-cn</code>的包装上就行了，当然首先要<code>Update lists</code>一下，之后到<code>System</code>-<code>System</code>下切换成<code>普通话</code>再刷新一下就变成中文界面了。</p>
+<p><img src="/img/oplucicn.png" alt="设置中文"></p>
+<p>当然，以后要装的部分软件也可以通过上面这种方式安装，但由于有的包列表里没有，我们在下面使用一种更通用的方法——从命令行安装。</p>
+<p>OpenWrt归根结底还是一个<strong>Linux发行版</strong>，所以Linux命令在这里依然适用。</p>
+<p>我们还是通过SSH登录：</p>
+<pre><code><span class="title">ssh</span> root@<span class="number">192.168.1.1</span>
+</code></pre><p>输入之前设置的密码后，就会看到OpenWrt特有的终端界面：</p>
+<pre><code>BusyBox v1.23.2 (2015-07-25 15:09:46 CEST) built-<span class="keyword">in</span> <span class="keyword">shell</span> (ash)
+
+  _______                     ________        __
+ |       |.-----.-----.-----.|  |  |  |.----.|  |_
+ |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
+ |_______||   __|_____|__|__||________||__|  |____|
+          |__| W I R <span class="keyword">E</span> <span class="keyword">L</span> <span class="keyword">E</span> S S   F R <span class="keyword">E</span> <span class="keyword">E</span> <span class="keyword">D</span> O <span class="literal">M</span>
+ -----------------------------------------------------
+ CHAOS CALMER (15.05, r46767)
+ -----------------------------------------------------
+<span class="comment">  * 1 1/2 oz Gin            Shake with a glassful</span>
+<span class="comment">  * 1/4 oz Triple Sec       of broken ice and pour</span>
+<span class="comment">  * 3/4 oz Lime Juice       unstrained into a goblet.</span>
+<span class="comment">  * 1 1/2 oz Orange Juice</span>
+<span class="comment">  * 1 tsp. Grenadine Syrup</span>
+ -----------------------------------------------------
+root@OpenWrt:~# 
+</code></pre><p>由于我使用的路由器是<code>ar71xx</code>架构（其实市面上大多路由器都是这个架构），因此下面的软件包也只适用这个架构，若架构不同请根据个人情况自行寻找软件包。</p>
+<h2 id="ShadowSocks">ShadowSocks</h2><p>在OpenWrt上我们可以安装<code>shdowsocks-libev</code>版本，顺便搭配LuCI界面的<code>luci-app</code>使用，这个项目在<a href="http://sourceforge.net/projects/openwrt-dist/files/" target="_blank" rel="external">sourceforge</a>有发布，安装包我们从这里获取：</p>
+<pre><code>wget <span class="symbol">http:</span>/<span class="regexp">/sourceforge.net/projects</span><span class="regexp">/openwrt-dist/files</span><span class="regexp">/shadowsocks-libev/</span><span class="number">2.4</span>.<span class="number">1</span>-<span class="number">6</span>f44d53/ar71xx/shadowsocks-libev-spec_2.<span class="number">4.1</span>-<span class="number">1_</span>ar71xx.ipk
+wget <span class="symbol">http:</span>/<span class="regexp">/sourceforge.net/projects</span><span class="regexp">/openwrt-dist/files</span><span class="regexp">/luci-app/shadowsocks</span>-spec/luci-app-shadowsocks-spec_1.<span class="number">3.2</span>-<span class="number">1_</span>all.ipk
+</code></pre><p>下载完成后使用<code>opkg</code>命令安装：</p>
+<pre><code>opkg <span class="keyword">install</span> shadowsocks-libev-spec_2.<span class="number">4.1</span>-<span class="number">1</span>_ar71xx.ipk
+opkg <span class="keyword">install</span> luci-app-shadowsocks-spec_1.<span class="number">3.2</span>-<span class="number">1</span>_all.ipk
+</code></pre><p>安装完成后<code>reboot</code>命令重启路由器，再次进入LiCI界面可以看到多了一个<code>Services</code>-<code>ShadowSocks</code>：</p>
+<p><img src="/img/opss.png" alt="ShadowSocks"></p>
+<p>就说明安装正确，在里面输入ShadowSocks服务器信息就可以自动代理了，凡是连上这台路由器的设备获取到的都是代理后的网络了。</p>
+<h2 id="6relayd">6relayd</h2><p>由于现在即使通过代理上网也是消耗校内流量的，为了不走流量，我们只能借助IPv6网络。但是普通的路由器很少可以正常获取IPv6地址，即使路由器能获取到连接设备也很难获取，除了NETGEAR的部分路由器（包括WNR2200）的新版固件是有IPv6连接的，并且本人亲测使用<code>穿透模式</code>可以正常使用IPv6网络。所以我希望在OpenWrt上也能使用<code>穿透模式</code>，再通过ShadowSocks代理IPv6网络就可以免流量访问外网了。</p>
+<p>要使用<code>穿透模式</code>就少不了<a href="https://wiki.openwrt.org/doc/uci/6relayd" target="_blank" rel="external">6relayd</a>这个软件。可是官方源并没提供这个包，于是还需要从网络获取并安装：</p>
+<pre><code>wget <span class="symbol">http:</span>/<span class="regexp">/193.87.95.148/openwrt</span><span class="regexp">/ar71/trunk</span><span class="regexp">/bin/ar</span>71xx/packages/<span class="number">6</span>relayd_2013-<span class="number">10</span>-<span class="number">21.1</span>-ad00c3dd9ee42f172870708724858ab502b3a689_ar71xx.ipk
+opkg install <span class="number">6</span>relayd_2013-<span class="number">10</span>-<span class="number">21.1</span>-ad00c3dd9ee42f172870708724858ab502b3a689_ar71xx.ipk
+</code></pre><p>安装完成之后编辑<code>/etc/config/6relayd</code>文件在默认配置后面加一组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">config relay</span><br><span class="line">	option master   <span class="string">'wan'</span></span><br><span class="line">	option network  <span class="string">'lan'</span></span><br><span class="line">	option rd       <span class="string">'relay'</span></span><br><span class="line">	option dhcpv6   <span class="string">'relay'</span></span><br><span class="line">	option ndp      <span class="string">'relay'</span></span><br></pre></td></tr></table></figure>
+<p>保存后使用下面的命令开启服务并设置为开机启动即可：</p>
+<pre><code><span class="regexp">/etc/</span>init.d/<span class="number">6</span>relayd start
+<span class="regexp">/etc/</span>init.d/<span class="number">6</span>relayd enable
+</code></pre><h1 id="配置路由器">配置路由器</h1><p>现在要到LuCI界面下找到<code>Network</code>-<code>Interfaces</code>并添加一个新的接口：</p>
+<p><img src="/img/opnew.png" alt="Add new interface"></p>
+<p>接口名叫<code>wan6</code>，协议选择<code>DHCPv6 client</code>，接口自定义为<code>@wan</code>：</p>
+<p><img src="/img/opwan6.png" alt="wan6"></p>
+<p>保存应用后重启路由器，就会发现多了一个WAN6接口，并且WAN口获取到IPv6地址了：</p>
+<p><img src="/img/opipv6.png" alt="IPv6地址"></p>
+<p>这时回到ShadowSocks的配置界面，将服务器地址改为VPS的IPv6地址就可以了：</p>
+<p><img src="/img/opsss.png" alt="ShadowSocks设置"></p>
+<p>记得要开全局代理，因为毕竟PPPoE拨着号呢，在校园网11月30日改革后有线网拨号后不用登录就能上网让我很慌啊，路由器一直连着网终归是有偷跑流量的风险，所以打开IPv6全局代理最为保险，使得能通过代理的IPv6网络可以使用而IPv4网络因为通不过代理无法使用。</p>
+<p>于是现在得到的效果就是任何连接到这台路由器的设备无需任何登录即可<strong>访问外网</strong>，而且<strong>不消耗校内网流量</strong>，网络还<strong>自带科学上网Buff</strong>，从此妈妈再也不用担心我流量不够用了。</p>
+
+        
+      
+    </div>
+
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/11/shadowsocks/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Digital Ocean + ShadowSocks 实现校园网免流量上网</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ad2 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9920928489161252"
+     data-ad-slot="5356294127"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+          
+            <div id="ukagaka_panel"></div>
+
+<aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a class="text" href="/2015/12/12/openwrt/">
+              
+                <i class="icon-file-o"></i> 
+              
+            OpenWrt + ShadowSocks 实现路由器自动代理</a>
+          </li>
+        
+          <li>
+            <a class="text" href="/2015/11/11/shadowsocks/">
+              
+                <i class="icon-file-o"></i> 
+              
+            Digital Ocean + ShadowSocks 实现校园网免流量上网</a>
+          </li>
+        
+          <li>
+            <a class="text" href="/2015/10/18/qt-problem/">
+              
+                <i class="icon-file-o"></i> 
+              
+            Qt5.5程序的打包与发布</a>
+          </li>
+        
+          <li>
+            <a class="text" href="/1970/01/01/hello-world/">
+              
+                <i class="icon-file-o"></i> 
+              
+            Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget widget-background1">   
+      	<ul>
+	      <li><a href="https://github.com/" target="_blank" title="GitHub"><i class="fa-github"></i> GitHub </a></li>
+	      <li><a href="https://developers.google.com/" target="_blank" title="Google Developers"><i class="fa-google"></i> Google Developers </a></li>
+	      <li><a href="https://liangzhenduo0608.github.io/" target="_blank" title="github.io"><i class="fa-github-alt"></i> Recursion </a></li>
+	      <li><a href="http://xzjqx.cn/" target="_blank" title="笑卒渐清晰"><i class="fa-wordpress"></i> xzjqx's blog </a></li>
+	      <li><a href="http://blog.muyujinxi.cn/" target="_blank" title="春哥的博客"><i class="fa-wordpress"></i> Spring bro's blog </a></li>
+    	</ul>
+    </div>
+</div>
+
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ad1 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9920928489161252"
+     data-ad-slot="7401763722"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  
+    
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/jquery.morris.ukagaka.resource.js"></script>
+<script src="/js/typed.js"></script>
+<script type="text/javascript">
+  $('#ukagaka_panel').ukagaka();
+</script>
+  
+</aside>
+          
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">    
+    <div class="social-group">
+      
+      <a href="https://github.com/liangzhenduo0608" target="_blank" title="GitHub"><i class="fa-github-square"></i></a>
+      
+      
+      <a href="https://plus.google.com/114761524022260759157" target="_blank" title="Google+"><i class="fa-google-plus-square"></i></a>
+      
+      
+      <a href="https://www.facebook.com/profile.php?id=100005630052910" target="_blank" title="Facebook"><i class="fa-facebook-square"></i></a>
+      
+      
+      <a href="https://twitter.com/liangzhenduo" target="_blank" title="Twitter" ><i class="fa-twitter-square"></i></a>
+      
+      
+    </div>
+    <div id="footer-info" class="inner">
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/morris821028/hexo-theme-landscape" target="_blank" title="landscape">landscape</a>     &copy; 2016 Shintaku 
+    </div>  
+
+  </div>
+</footer>
+
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/picture" class="mobile-nav-link">Pictures</a>
+  
+    <a href="/works" class="mobile-nav-link">Works</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'shintaku';
+  
+  var disqus_url = 'http://www.shintaku.cc/2015/12/12/openwrt/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/jquery.lazyload.js" type="text/javascript"></script>
+<script src="/js/jquery.als-1.6.js" type="text/javascript"></script>
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
