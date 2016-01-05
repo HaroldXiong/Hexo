@@ -42,11 +42,5 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# Files
-.png
-.jpg
-.exe
-.mp3
-
 # .git
 /*/.deploy_git/*
