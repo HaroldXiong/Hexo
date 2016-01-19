@@ -4,7 +4,8 @@
 
 # Site
 title: Shintaku's Blog
-subtitle: お前ら知ってる！？30過ぎても童貞なら魔法使いになれるんだぜ～
+#subtitle: お前ら知ってる！？30過ぎても童貞なら魔法使いになれるんだぜ～
+subtitle: いいこと？暁の水平線に勝利を刻みなさい！
 description:
 author: Shintaku
 language:
@@ -12,7 +13,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://www.shintaku.cc/
+url: https://www.shintaku.cc/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

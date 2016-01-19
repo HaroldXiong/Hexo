@@ -15,68 +15,64 @@ photos:
 #查找依赖工具
 通过阅读[官方文档](http://doc.qt.io/qt-5/windows-deployment.html#application-dependencies)发现，Qt里面内置了一个dll依赖性检查工具——`windeploy.exe`。这个程序应当在`~/Qt/Qt5.5.0/5.5/mingw492_32/bin/`下，通过命令提示符执行它可以得到`使用方法×1`：
 
-``` bash
 C:\Users\Shintaku>C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe
-Please specify the binary or folder.
+    Please specify the binary or folder.
 
-Usage: C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe [options] [files]
-Qt Deploy Tool 5.5.0
+    Usage: C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe [options] [files]
+    Qt Deploy Tool 5.5.0
 
-The simplest way to use windeployqt is to add the bin directory of your Qt
-installation (e.g. <QT_DIR\bin>) to the PATH variable and then run:
-  windeployqt <path-to-app-binary>
-If ICU, ANGLE, etc. are not in the bin directory, they need to be in the PATH
-variable. If your application uses Qt Quick, run:
-  windeployqt --qmldir <path-to-app-qml-files> <path-to-app-binary>
+    The simplest way to use windeployqt is to add the bin directory of your Qt installation (e.g. <QT_DIR\bin>) to the PATH variable and then run:
+      windeployqt <path-to-app-binary>
+    If ICU, ANGLE, etc. are not in the bin directory, they need to be in the PATH variable. If your application uses Qt Quick, run:
+      windeployqt --qmldir <path-to-app-qml-files> <path-to-app-binary>
 
-Options:
-  -?, -h, --help             Displays this help.
-  -v, --version              Displays version information.
-  --dir <directory>          Use directory instead of binary directory.
-  --libdir <path>            Copy libraries to path.
-  --debug                    Assume debug binaries.
-  --release                  Assume release binaries.
-  --release-with-debug-info  Assume release binaries with debug information.
-  --force                    Force updating files.
-  --dry-run                  Simulation mode. Behave normally, but do not
-                             copy/update any files.
-  --no-plugins               Skip plugin deployment.
-  --no-libraries             Skip library deployment.
-  --qmldir <directory>       Scan for QML-imports starting from directory.
-  --no-quick-import          Skip deployment of Qt Quick imports.
-  --no-translations          Skip deployment of translations.
-  --no-system-d3d-compiler   Skip deployment of the system D3D compiler.
-  --compiler-runtime         Deploy compiler runtime (Desktop only).
-  --no-compiler-runtime      Do not deploy compiler runtime (Desktop only).
-  --webkit2                  Deployment of WebKit2 (web process).
-  --no-webkit2               Skip deployment of WebKit2.
-  --json                     Print to stdout in JSON format.
-  --angle                    Force deployment of ANGLE.
-  --no-angle                 Disable deployment of ANGLE.
-  --list <option>            Print only the names of the files copied.
-                             Available options:
-                              source:   absolute path of the source files
-                              target:   absolute path of the target files
-                              relative: paths of the target files, relative
-                                        to the target directory
-                              mapping:  outputs the source and the relative
-                                        target, suitable for use within an
-                                        Appx mapping file
-  --verbose <level>          Verbose level.
+    Options:
+      -?, -h, --help             Displays this help.
+      -v, --version              Displays version information.
+      --dir <directory>          Use directory instead of binary directory.
+      --libdir <path>            Copy libraries to path.
+      --debug                    Assume debug binaries.
+      --release                  Assume release binaries.
+      --release-with-debug-info  Assume release binaries with debug information.
+      --force                    Force updating files.
+      --dry-run                  Simulation mode. Behave normally, but do not
+                                 copy/update any files.
+      --no-plugins               Skip plugin deployment.
+      --no-libraries             Skip library deployment.
+      --qmldir <directory>       Scan for QML-imports starting from directory.
+      --no-quick-import          Skip deployment of Qt Quick imports.
+      --no-translations          Skip deployment of translations.
+      --no-system-d3d-compiler   Skip deployment of the system D3D compiler.
+      --compiler-runtime         Deploy compiler runtime (Desktop only).
+      --no-compiler-runtime      Do not deploy compiler runtime (Desktop only).
+      --webkit2                  Deployment of WebKit2 (web process).
+      --no-webkit2               Skip deployment of WebKit2.
+      --json                     Print to stdout in JSON format.
+      --angle                    Force deployment of ANGLE.
+      --no-angle                 Disable deployment of ANGLE.
+      --list <option>            Print only the names of the files copied.
+                                 Available options:
+                                  source:   absolute path of the source files
+                                  target:   absolute path of the target files
+                                  relative: paths of the target files, relative
+                                            to the target directory
+                                  mapping:  outputs the source and the relative
+                                            target, suitable for use within an
+                                            Appx mapping file
+      --verbose <level>          Verbose level.
 
-Qt libraries can be added by passing their name (-xml) or removed by passing
-the name prepended by --no- (--no-xml). Available libraries:
-bluetooth clucene concurrent core declarative designer designercomponents
-enginio gui qthelp multimedia multimediawidgets multimediaquick network nfc
-opengl positioning printsupport qml qmltooling quick quickparticles quickwidgets
+    Qt libraries can be added by passing their name (-xml) or removed by passing the name prepended by --no- (--no-xml). Available libraries:
+    bluetooth clucene concurrent core declarative designer designercomponents
+    enginio gui qthelp multimedia multimediawidgets multimediaquick network nfc
+    opengl positioning printsupport qml qmltooling quick quickparticles quickwidgets
 
-script scripttools sensors serialport sql svg test webkit webkitwidgets
-websockets widgets winextras xml xmlpatterns webenginecore webengine
-webenginewidgets 3dcore 3drenderer 3dquick 3dquickrenderer 3dinput geoservices
+    script scripttools sensors serialport sql svg test webkit webkitwidgets
+    websockets widgets winextras xml xmlpatterns webenginecore webengine
+    webenginewidgets 3dcore 3drenderer 3dquick 3dquickrenderer 3dinput geoservices
 
-Arguments:
-  [files]                    Binaries or directory containing the binary.
-```
+    Arguments:
+      [files]                    Binaries or directory containing the binary.
+
 
 发现当`windeploy`有一个参数为`二进制文件`时，会在其所在目录下生成该文件所依赖的所有文件。
 
@@ -84,59 +80,56 @@ Arguments:
 于是我们可以在任意目录下新建一个文件夹，然后将Qt编译生成的`可执行文件`复制到新文件夹下。
 接下来在命令提示符里执行`windeploy yourProgram.exe`便可以将其所需依赖加入到新文件夹中了。
 
-``` bash
-C:\Users\Shintaku>C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe C:\Users\Shi
-ntaku\Desktop\release\Library.exe
-C:\Users\Shintaku\Desktop\release\Library.exe 32 bit, release executable
-Adding Qt5Svg for qsvgicon.dll
-Direct dependencies: Qt5Core Qt5Gui Qt5Sql Qt5Widgets
-All dependencies   : Qt5Core Qt5Gui Qt5Sql Qt5Widgets
-To be deployed     : Qt5Core Qt5Gui Qt5Sql Qt5Svg Qt5Widgets
-Updating Qt5Core.dll.
-Updating Qt5Gui.dll.
-Updating Qt5Sql.dll.
-Updating Qt5Svg.dll.
-Updating Qt5Widgets.dll.
-Updating libGLESV2.dll.
-Updating libEGL.dll.
-Updating D3Dcompiler_47.dll.
-Creating directory iconengines.
-Updating qsvgicon.dll.
-Creating directory imageformats.
-Updating qdds.dll.
-Updating qgif.dll.
-Updating qicns.dll.
-Updating qico.dll.
-Updating qjp2.dll.
-Updating qjpeg.dll.
-Updating qmng.dll.
-Updating qsvg.dll.
-Updating qtga.dll.
-Updating qtiff.dll.
-Updating qwbmp.dll.
-Updating qwebp.dll.
-Creating directory platforms.
-Updating qwindows.dll.
-Creating directory sqldrivers.
-Updating qsqlite.dll.
-Updating qsqlmysql.dll.
-Updating qsqlodbc.dll.
-Updating qsqlpsql.dll.
-Creating C:\Users\Shintaku\Desktop\release\translations...
-Creating qt_ca.qm...
-Creating qt_cs.qm...
-Creating qt_de.qm...
-Creating qt_fi.qm...
-Creating qt_fr.qm...
-Creating qt_hu.qm...
-Creating qt_it.qm...
-Creating qt_ja.qm...
-Creating qt_ko.qm...
-Creating qt_lv.qm...
-Creating qt_ru.qm...
-Creating qt_sk.qm...
-Creating qt_uk.qm...
-```
+    C:\Users\Shintaku>C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe C:\Users\Shintaku\Desktop\release\Library.exe
+    C:\Users\Shintaku\Desktop\release\Library.exe 32 bit, release executable
+    Adding Qt5Svg for qsvgicon.dll
+    Direct dependencies: Qt5Core Qt5Gui Qt5Sql Qt5Widgets
+    All dependencies   : Qt5Core Qt5Gui Qt5Sql Qt5Widgets
+    To be deployed     : Qt5Core Qt5Gui Qt5Sql Qt5Svg Qt5Widgets
+    Updating Qt5Core.dll.
+    Updating Qt5Gui.dll.
+    Updating Qt5Sql.dll.
+    Updating Qt5Svg.dll.
+    Updating Qt5Widgets.dll.
+    Updating libGLESV2.dll.
+    Updating libEGL.dll.
+    Updating D3Dcompiler_47.dll.
+    Creating directory iconengines.
+    Updating qsvgicon.dll.
+    Creating directory imageformats.
+    Updating qdds.dll.
+    Updating qgif.dll.
+    Updating qicns.dll.
+    Updating qico.dll.
+    Updating qjp2.dll.
+    Updating qjpeg.dll.
+    Updating qmng.dll.
+    Updating qsvg.dll.
+    Updating qtga.dll.
+    Updating qtiff.dll.
+    Updating qwbmp.dll.
+    Updating qwebp.dll.
+    Creating directory platforms.
+    Updating qwindows.dll.
+    Creating directory sqldrivers.
+    Updating qsqlite.dll.
+    Updating qsqlmysql.dll.
+    Updating qsqlodbc.dll.
+    Updating qsqlpsql.dll.
+    Creating C:\Users\Shintaku\Desktop\release\translations...
+    Creating qt_ca.qm...
+    Creating qt_cs.qm...
+    Creating qt_de.qm...
+    Creating qt_fi.qm...
+    Creating qt_fr.qm...
+    Creating qt_hu.qm...
+    Creating qt_it.qm...
+    Creating qt_ja.qm...
+    Creating qt_ko.qm...
+    Creating qt_lv.qm...
+    Creating qt_ru.qm...
+    Creating qt_sk.qm...
+    Creating qt_uk.qm...
 
 强烈建议在此文件夹下运行一下程序试试，因为这个工具并不一定能将所有必需的依赖加进来，这时运行极有可能还会报
 ![系统错误](/img/qt2.png)

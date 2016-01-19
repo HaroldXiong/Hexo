@@ -27,7 +27,7 @@ photos:
 
 ![选择配置](/img/ssch1.png)
 
-数据中心任意选择，建议选择位于美国西海岸或者亚太地区的，我选择的是旧金山机房。
+数据中心任意选择，考虑到国际光缆的走向，建议选择位于美国西海岸或者亚太地区的，我选择的是旧金山机房。
 
 选择镜像的时候选一个自己熟悉的系统就可以了，也可以选择带一键安装应用的，按需选择即可。
 
@@ -45,23 +45,24 @@ SSH公钥可以现在添加，也可以以后再添加。之后点创建就可�
 
 	scp ~/.ssh/id_rsa.pub root@IP:~/.ssh/authorized_keys
 
-如果本地`~/.ssh`目录下没有`id_rsa`这样的文件，可以使用`ssh-kengen`命令在该目录下生成。这样以后每次ssh连接时就不用再输密码了。
+如果本地`~/.ssh`目录下没有`id_rsa`这样的文件，可以使用`ssh-keygen`命令在该目录下生成。这样以后每次ssh连接时就不用再输密码了。
 
-#配置Shadowsocks
+#配置ShadowSocks
 ##服务器端
 ###搭建服务
-SSH登录到VPS服务器后要使用pip安装ShadowSocks。
+SSH登录到VPS服务器后要使用pip安装ShadowSocks，所以先装`pip`。
 
-如果服务器装的CentOS系统，使用命令：
+如果服务器是基于Red Hat的系统（CentOS等等），使用命令：
 
 	yum install python-setuptools && easy_install pip
-	pip install shadowsocks
-
-如果是Debian或Ubuntu系统，使用命令：
+	
+如果是基于Debian的系统（Ubuntu等等），使用命令：
 
 	apt-get install python-pip
-	pip install shadowsocks
 
+之后通过pip安装ShadowSocks：
+	
+	pip install shadowsocks
 
 安装完成后，在`/etc/`下新建一个叫`shadowsocks.json`的配置文件，内容如下：
 
@@ -97,7 +98,7 @@ alias ssstop='ssserver -d stop'
 
 锐速是一款免费的TCP底层加速软件，可以便捷地完成服务器网络的优化，配合ShadowSocks效果甚好。
 
-欲用服务，先要去[锐速官网](http://www.serverspeeder.com/)注册。然后在服务器上通过以下命令下载安装：
+首先要去[锐速官网](http://www.serverspeeder.com/)注册。然后在服务器上通过以下命令下载安装：
 
 	wget http://my.serverspeeder.com/d/ls/serverSpeederInstaller.tar.gz
 	tar xzvf serverSpeederInstaller.tar.gz

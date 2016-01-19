@@ -10,12 +10,12 @@
 开通VPS服务器目前使用体验较好的VPS服务商大概有Linode、Sakura、Digital Ocean等等，由于GitHub的Student Developer Pack有D">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Digital Ocean + ShadowSocks 实现校园网免流量上网">
-<meta property="og:url" content="http://www.shintaku.cc/2015/11/11/shadowsocks/index.html">
+<meta property="og:url" content="https://www.shintaku.cc/2015/11/11/shadowsocks/index.html">
 <meta property="og:site_name" content="Shintaku's Blog">
 <meta property="og:description" content="由于校园网的资费坑得一逼，况且有流量限制，这种感觉甚是让人不爽。之前曾看到郑老湿和陈老湿在VPS搭上VPN免流量上网，后来又在开源课上受到杜老师的启发，决定通过ShadowSocks代理后的IPv6教育网实现免流量上网。
 开通VPS服务器目前使用体验较好的VPS服务商大概有Linode、Sakura、Digital Ocean等等，由于GitHub的Student Developer Pack有D">
-<meta property="og:image" content="http://www.shintaku.cc/img/ssbanner.png">
-<meta property="og:updated_time" content="2015-12-18T12:20:51.000Z">
+<meta property="og:image" content="https://www.shintaku.cc/img/ssbanner.png">
+<meta property="og:updated_time" content="2016-01-17T05:04:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Digital Ocean + ShadowSocks 实现校园网免流量上网">
 <meta name="twitter:description" content="由于校园网的资费坑得一逼，况且有流量限制，这种感觉甚是让人不爽。之前曾看到郑老湿和陈老湿在VPS搭上VPN免流量上网，后来又在开源课上受到杜老师的启发，决定通过ShadowSocks代理后的IPv6教育网实现免流量上网。
@@ -75,7 +75,7 @@
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">お前ら知ってる！？30過ぎても童貞なら魔法使いになれるんだぜ～</a>
+          <a href="/" id="subtitle">いいこと？暁の水平線に勝利を刻みなさい！</a>
         </h2>
       
     </div>
@@ -115,7 +115,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.shintaku.cc"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.shintaku.cc"></form>
       </div>
     </div>
   </div>
@@ -134,7 +134,7 @@
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="/img/ssbanner.png" rel="gallery_cij5c6nae0002oeydjn7ubeay">
+      <a class="article-gallery-img fancybox" href="/img/ssbanner.png" rel="gallery_cijk0pxad0002adydz02dbojx">
         <img src="/img/ssbanner.png" itemprop="image">
       </a>
     
@@ -153,9 +153,9 @@
       </header>
         
     <footer class="article-footer">
-      <a data-url="http://www.shintaku.cc/2015/11/11/shadowsocks/" data-id="cij5c6nae0002oeydjn7ubeay" class="article-share-link">Share</a>
+      <a data-url="https://www.shintaku.cc/2015/11/11/shadowsocks/" data-id="cijk0pxad0002adydz02dbojx" class="article-share-link">Share</a>
       
-        <a href="http://www.shintaku.cc/2015/11/11/shadowsocks/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="https://www.shintaku.cc/2015/11/11/shadowsocks/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Digital-Ocean/">Digital Ocean</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ShadowSocks/">ShadowSocks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/科学上网/">科学上网</a></li></ul>
@@ -167,7 +167,7 @@
               <div id="toc" class="toc-article">
               <h2 class="toc-title"><span>contents</span></h2>
               
-                  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#开通VPS服务器"><span class="toc-number">1.</span> <span class="toc-text">开通VPS服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#注册DO帐号"><span class="toc-number">1.1.</span> <span class="toc-text">注册DO帐号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新建服务器"><span class="toc-number">1.2.</span> <span class="toc-text">新建服务器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置Shadowsocks"><span class="toc-number">2.</span> <span class="toc-text">配置Shadowsocks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器端"><span class="toc-number">2.1.</span> <span class="toc-text">服务器端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建服务"><span class="toc-number">2.1.1.</span> <span class="toc-text">搭建服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性能优化"><span class="toc-number">2.1.2.</span> <span class="toc-text">性能优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地客户端"><span class="toc-number">2.2.</span> <span class="toc-text">本地客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows"><span class="toc-number">2.2.1.</span> <span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac_OS_X"><span class="toc-number">2.2.2.</span> <span class="toc-text">Mac OS X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux"><span class="toc-number">2.2.3.</span> <span class="toc-text">Linux</span></a></li></ol></li></ol></li></ol>
+                  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#开通VPS服务器"><span class="toc-number">1.</span> <span class="toc-text">开通VPS服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#注册DO帐号"><span class="toc-number">1.1.</span> <span class="toc-text">注册DO帐号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新建服务器"><span class="toc-number">1.2.</span> <span class="toc-text">新建服务器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置ShadowSocks"><span class="toc-number">2.</span> <span class="toc-text">配置ShadowSocks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器端"><span class="toc-number">2.1.</span> <span class="toc-text">服务器端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建服务"><span class="toc-number">2.1.1.</span> <span class="toc-text">搭建服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性能优化"><span class="toc-number">2.1.2.</span> <span class="toc-text">性能优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地客户端"><span class="toc-number">2.2.</span> <span class="toc-text">本地客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows"><span class="toc-number">2.2.1.</span> <span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac_OS_X"><span class="toc-number">2.2.2.</span> <span class="toc-text">Mac OS X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux"><span class="toc-number">2.2.3.</span> <span class="toc-text">Linux</span></a></li></ol></li></ol></li></ol>
               
               </div>
           
@@ -182,7 +182,7 @@
 <h2 id="新建服务器">新建服务器</h2><p>首先要给服务器取一个Hostname，按个人喜好随意命名。</p>
 <p>然后选择套餐，我选择的是最便宜的$5套餐，包含<strong>512M的内存、20G的SSD和1000G流量</strong>每个月。</p>
 <p><img src="/img/ssch1.png" alt="选择配置"></p>
-<p>数据中心任意选择，建议选择位于美国西海岸或者亚太地区的，我选择的是旧金山机房。</p>
+<p>数据中心任意选择，考虑到国际光缆的走向，建议选择位于美国西海岸或者亚太地区的，我选择的是旧金山机房。</p>
 <p>选择镜像的时候选一个自己熟悉的系统就可以了，也可以选择带一键安装应用的，按需选择即可。</p>
 <p><img src="/img/ssch2.png" alt="选择配置"></p>
 <p>附加选项里<strong>记得选上IPv6</strong>，因为在本文的需求中这是必不可少的。</p>
@@ -191,14 +191,14 @@
 <pre><code><span class="title">ssh</span> root<span class="variable">@IP</span>
 </code></pre><p>成功登录后，首先要求更改root密码。如果希望以后本机登录不再输入密码，可以将本地的公钥上传到服务器端：</p>
 <pre><code>scp ~<span class="regexp">/.ssh/id</span>_rsa.pub root<span class="variable">@IP</span><span class="symbol">:~/</span>.ssh/authorized_keys
-</code></pre><p>如果本地<code>~/.ssh</code>目录下没有<code>id_rsa</code>这样的文件，可以使用<code>ssh-kengen</code>命令在该目录下生成。这样以后每次ssh连接时就不用再输密码了。</p>
-<h1 id="配置Shadowsocks">配置Shadowsocks</h1><h2 id="服务器端">服务器端</h2><h3 id="搭建服务">搭建服务</h3><p>SSH登录到VPS服务器后要使用pip安装ShadowSocks。</p>
-<p>如果服务器装的CentOS系统，使用命令：</p>
+</code></pre><p>如果本地<code>~/.ssh</code>目录下没有<code>id_rsa</code>这样的文件，可以使用<code>ssh-keygen</code>命令在该目录下生成。这样以后每次ssh连接时就不用再输密码了。</p>
+<h1 id="配置ShadowSocks">配置ShadowSocks</h1><h2 id="服务器端">服务器端</h2><h3 id="搭建服务">搭建服务</h3><p>SSH登录到VPS服务器后要使用pip安装ShadowSocks，所以先装<code>pip</code>。</p>
+<p>如果服务器是基于Red Hat的系统（CentOS等等），使用命令：</p>
 <pre><code>yum <span class="keyword">install</span> python-setuptools &amp;&amp; easy_install pip
-pip <span class="keyword">install</span> shadowsocks
-</code></pre><p>如果是Debian或Ubuntu系统，使用命令：</p>
-<pre><code>apt-get <span class="keyword">install</span> python-pip
-pip <span class="keyword">install</span> shadowsocks
+</code></pre><p>如果是基于Debian的系统（Ubuntu等等），使用命令：</p>
+<pre><code>apt-<span class="built_in">get</span> install <span class="keyword">python</span>-pip
+</code></pre><p>之后通过pip安装ShadowSocks：</p>
+<pre><code>pip <span class="keyword">install</span> shadowsocks
 </code></pre><p>安装完成后，在<code>/etc/</code>下新建一个叫<code>shadowsocks.json</code>的配置文件，内容如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="string">"server"</span> : <span class="string">"::"</span>,</span><br><span class="line">	<span class="string">"server_port"</span> : <span class="number">8388</span>,</span><br><span class="line">	<span class="string">"local_address"</span> : <span class="string">"127.0.0.1"</span>,</span><br><span class="line">	<span class="string">"local_port"</span> : <span class="number">1080</span>,</span><br><span class="line">	<span class="string">"password"</span> : <span class="string">"your_password"</span>,</span><br><span class="line">	<span class="string">"timeout"</span> : <span class="number">300</span>,</span><br><span class="line">	<span class="string">"method"</span> : <span class="string">"rc4-md5"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其中<code>&quot;server&quot;</code>一栏之所以填<code>&quot;::&quot;</code>是为了同时监听IPv4/v6两个端口，因为本文的需求中我们需要双栈连接，如果VPS没有IPv6功能或仅是为了搭梯子用，这里面填写一个IPv4的地址就可以了。<code>&quot;password&quot;</code>栏填写自己要设置的密码。至于<code>&quot;method&quot;</code>加密方式一栏，主流的有<code>rc4-md5</code>和<code>aes-256-cfb</code>等等，据说前者速度快，后者更安全，可以根据个人喜好自行权衡。</p>
@@ -210,7 +210,7 @@ ssserver -<span class="keyword">d</span> stop
 <p>保存后记得使用<code>source ~/.bashrc</code>命令应用配置，这样就可以每次通过<code>ssstart</code>和<code>ssstop</code>命令启动或停止服务了。如果怕服务器重启以后懒得手动启动ss服务，也可以加到开机启动项里，编辑<code>/etc/rc.local</code>，把上面的启动命令写进去就行了。</p>
 <h3 id="性能优化">性能优化</h3><p>现在我们要祭出TCP加速神器——<strong>锐速</strong>了。</p>
 <p>锐速是一款免费的TCP底层加速软件，可以便捷地完成服务器网络的优化，配合ShadowSocks效果甚好。</p>
-<p>欲用服务，先要去<a href="http://www.serverspeeder.com/" target="_blank" rel="external">锐速官网</a>注册。然后在服务器上通过以下命令下载安装：</p>
+<p>首先要去<a href="http://www.serverspeeder.com/" target="_blank" rel="external">锐速官网</a>注册。然后在服务器上通过以下命令下载安装：</p>
 <pre><code>wget http:<span class="comment">//my.serverspeeder.com/d/ls/serverSpeederInstaller.tar.gz</span>
 tar xzvf serverSpeederInstaller<span class="class">.tar</span><span class="class">.gz</span>
 bash serverSpeederInstaller.sh
@@ -409,7 +409,7 @@ bash serverSpeederInstaller.sh
 <script>
   var disqus_shortname = 'shintaku';
   
-  var disqus_url = 'http://www.shintaku.cc/2015/11/11/shadowsocks/';
+  var disqus_url = 'https://www.shintaku.cc/2015/11/11/shadowsocks/';
   
   (function(){
     var dsq = document.createElement('script');

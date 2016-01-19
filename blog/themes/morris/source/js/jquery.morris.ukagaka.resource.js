@@ -296,16 +296,30 @@
                 continous = true,
                 autoplay = false,
                 playlist = [{
-                    title: 'Time After Time - 花舞う街で',
+                    title: '吹雪',
+                    artist: '西沢幸奏',
+                    album: '艦隊これくしょん -艦これ-',
+                    cover: '',
+                    mp3: '/file/吹雪.mp3',
+                    ogg: '/file/吹雪.mp3'
+                },{
+                    title: '海色',
+                    artist: 'AKINO',
+                    album: '艦隊これくしょん -艦これ-',
+                    cover: '',
+                    mp3: '/file/海色.mp3',
+                    ogg: '/file/海色.mp3'
+                },{
+                    title: 'Time after time〜花舞う街で〜',
                     artist: '倉木麻衣',
-                    album: '',
+                    album: '名探偵コナン 迷宮の十字路',
                     cover: '',
                     mp3: '/file/Time After Time.mp3',
                     ogg: '/file/Time After Time.mp3'
                 },{
                     title: '轮回之境',
                     artist: 'Critty',
-                    album: '',
+                    album: '弦上春雪',
                     cover: '',
                     mp3: '/file/轮回之境.mp3',
                     ogg: '/file/轮回之境.mp3'
@@ -474,14 +488,14 @@
                 if (shuffle === 'true') {
                     shufflePlay();
                 } else {
-                    switchTrack(--currentTrack);
+                    switchTrack(++currentTrack);
                 }
             });
             player.find('.fa-backward').on('click', function() {
                 if (shuffle === 'true') {
                     shufflePlay();
                 } else {
-                    switchTrack(++currentTrack);
+                    switchTrack(--currentTrack);
                 }
             });
 
@@ -524,7 +538,7 @@
         googleSheetField: "entry.1522432738",
         talkTime: 60000,
 
-        ukagakaText: "和美",
+        ukagakaText: "岛风",
         loadingText: '貌似被墙了呢.^100.^100.',
         learnPlaceholder: "被墙了还怎么学习？",
         menuMainText: "使用選單功能&#65292; 不是钦点！",
@@ -535,7 +549,7 @@
         menuSubmitText: "$ 確認",
         menuQueryText: "提高姿势水平<br/>",
         logText: "Shintaku 修正<br/>找尋 AI 系統<br/>谈笑风生<br/>",
-        imgs: ['/img/uk0.png']
+        imgs: ['/img/shimakaze.png']
     };
 
     $.ukagaka.talking = [];
