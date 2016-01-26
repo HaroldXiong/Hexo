@@ -4,7 +4,7 @@ menu:
   - {name: About, path: /about, class: fa-user, layout: 2}
   - {name: Archives, path: /archives, class: fa-archive, layout: 2}
   - {name: Tags, path: /tags, class: fa-tags, layout: 2}
-  - {name: Pictures, path: /picture, class: fa-camera, layout: 2}
+  - {name: Gallery, path: /gallery, class: fa-camera, layout: 2}
   - {name: Works, path: /works, class: fa-trophy, layout: 2}
 
 rss: /atom.xml
@@ -18,6 +18,7 @@ sidebar: top
 widgets:
 - category
 - recent_posts
+- tagcloud
 - links
 - ukagaka
 
@@ -43,4 +44,7 @@ facebook_url: https://www.facebook.com/profile.php?id=100005630052910
 github_url: https://github.com/liangzhenduo0608
 google_plus_url: https://plus.google.com/114761524022260759157
 twitter_url: https://twitter.com/liangzhenduo
-#uhunt_url: http://uhunt.felix-halim.net/id/46705
+weibo_url: http://weibo.com/378950608
+renren_url: http://www.renren.com/357959793
+qzone_url: http://user.qzone.qq.com/825875484
+mail_url: mailto:liangzhenduo0608@hotmail.com

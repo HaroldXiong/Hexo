@@ -1,15 +1,18 @@
 title: Qt5.5程序的打包与发布
 date: 2015-10-18 21:11:11
 tags: [Qt]
+categories: [课程, 课程设计]
 photos: 
 	- /img/qtbanner.png
 ---
 因为要做C＋＋软件实习的大作业，所以选择了易于上手的Qt作为图形化界面程序开发框架，IDE自然就是Qt Creator了。但是Qt程序的打包发布却是不接地气，因为依赖实在是太多了。有的时候加好依赖后在自己的开发环境上可以运行，但脱离开发环境却依旧报
 > This application failed to start because it could not find or load the Qt platform plugin "windows".
 
-![无法加载qwindows](/img/qt0.png)
+![无法加载qwindows](/img/qtwindows.png)
+
 甚至
-![Runtime](/img/qt1.png)
+
+![Runtime](/img/qtruntime.png)
 于是现在亟待解决的问题就是如何能够找到所有所需依赖并能够将其打包引用。
 
 #查找依赖工具
@@ -21,9 +24,11 @@ C:\Users\Shintaku>C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe
     Usage: C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe [options] [files]
     Qt Deploy Tool 5.5.0
 
-    The simplest way to use windeployqt is to add the bin directory of your Qt installation (e.g. <QT_DIR\bin>) to the PATH variable and then run:
+    The simplest way to use windeployqt is to add the bin directory of your Qt installation 
+    (e.g. <QT_DIR\bin>) to the PATH variable and then run:
       windeployqt <path-to-app-binary>
-    If ICU, ANGLE, etc. are not in the bin directory, they need to be in the PATH variable. If your application uses Qt Quick, run:
+    If ICU, ANGLE, etc. are not in the bin directory, they need to be in the PATH variable. 
+    If your application uses Qt Quick, run:
       windeployqt --qmldir <path-to-app-qml-files> <path-to-app-binary>
 
     Options:
@@ -61,7 +66,8 @@ C:\Users\Shintaku>C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe
                                             Appx mapping file
       --verbose <level>          Verbose level.
 
-    Qt libraries can be added by passing their name (-xml) or removed by passing the name prepended by --no- (--no-xml). Available libraries:
+    Qt libraries can be added by passing their name (-xml) or removed 
+    by passing the name prepended by --no- (--no-xml). Available libraries:
     bluetooth clucene concurrent core declarative designer designercomponents
     enginio gui qthelp multimedia multimediawidgets multimediaquick network nfc
     opengl positioning printsupport qml qmltooling quick quickparticles quickwidgets
@@ -80,8 +86,8 @@ C:\Users\Shintaku>C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe
 于是我们可以在任意目录下新建一个文件夹，然后将Qt编译生成的`可执行文件`复制到新文件夹下。
 接下来在命令提示符里执行`windeploy yourProgram.exe`便可以将其所需依赖加入到新文件夹中了。
 
-    C:\Users\Shintaku>C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe C:\Users\Shintaku\Desktop\release\Library.exe
-    C:\Users\Shintaku\Desktop\release\Library.exe 32 bit, release executable
+    > C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe Library.exe
+    Library.exe 32 bit, release executable
     Adding Qt5Svg for qsvgicon.dll
     Direct dependencies: Qt5Core Qt5Gui Qt5Sql Qt5Widgets
     All dependencies   : Qt5Core Qt5Gui Qt5Sql Qt5Widgets
@@ -132,7 +138,7 @@ C:\Users\Shintaku>C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe
     Creating qt_uk.qm...
 
 强烈建议在此文件夹下运行一下程序试试，因为这个工具并不一定能将所有必需的依赖加进来，这时运行极有可能还会报
-![系统错误](/img/qt2.png)
+![系统错误](/img/qterror.png)
 如果这样，请移步`~/Qt/Qt5.5.0/5.5/mingw492_32/bin`下找到缺少的`.dll`文件将它们移到新文件夹下。经过这步检查，在开发环境下应该可以正常运行可执行文件了。
 
 #修改引用路径

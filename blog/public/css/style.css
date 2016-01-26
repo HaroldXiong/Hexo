@@ -375,7 +375,7 @@ body {
   -o-transition: top 0.5s ease-out;
 }
 #banner:hover {
-  top: 30px;
+  top: 0px;
 }
 #banner-right {
   position: absolute;
@@ -387,7 +387,7 @@ body {
   text-align: center;
   height: 40px;
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 0;
   margin-top: -20px;
   font-family: "Georgia", "Microsoft YaHei", "Times New Roman", serif;
@@ -3611,7 +3611,7 @@ pre .javascript .function {
   position: fixed;
   width: 256px;
   right: 5px;
-  bottom: 250px;
+  bottom: 380px;
   z-index: 9999;
   font-family: "Open Sans Light", "Georgia", "Microsoft YaHei", "Times New Roman", serif;
 }
@@ -3666,10 +3666,10 @@ pre .javascript .function {
   text-decoration: underline;
 }
 .ukagaka_img {
-  max-height: 270px;
+  max-height: 380px;
   position: fixed;
-  right: 0px;
-  bottom: -20px;
+  right: 36px;
+  bottom: 0px;
   pointer-events: none;
 }
 .ukagaka_log {

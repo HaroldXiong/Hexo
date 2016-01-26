@@ -95,7 +95,7 @@
           
         
           
-            <a class="main-nav-link" href="/picture"><i class=fa-camera title='Pictures'></i> Pictures</a>
+            <a class="main-nav-link" href="/gallery"><i class=fa-camera title='Gallery'></i> Gallery</a>
           
         
           
@@ -119,19 +119,113 @@
         
           <section id="main">
   
-    <article id="post-openwrt" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-ssl" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/12/12/openwrt/" class="article-date">
-  <time datetime="2015-12-12T04:12:12.000Z" itemprop="datePublished">2015-12-12</time>
+    <a href="/2015/12/30/ssl/" class="article-date">
+  <time datetime="2015-12-30T15:33:33.000Z" itemprop="datePublished">2015-12-30</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网络/">网络</a>►<a class="article-category-link" href="/categories/网络/网站部署/">网站部署</a>
+  </div>
+
   </div>
   <div class="article-inner ">
     
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="/img/opbanner.png" rel="gallery_cijk0pxao000cadydkxx81obc">
+      <a class="article-gallery-img fancybox" href="/img/sslbanner.png" rel="gallery_cijskqarg000ccafyo05r8eba">
+        <img src="/img/sslbanner.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/30/ssl/">SSL证书的申请与配置</a>
+    </h1>
+  
+
+      </header>
+        
+    <footer class="article-footer">
+      <a data-url="https://www.shintaku.cc/2015/12/30/ssl/" data-id="cijskqarg000ccafyo05r8eba" class="article-share-link">Share</a>
+      
+        <a href="https://www.shintaku.cc/2015/12/30/ssl/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器/">服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网站/">网站</a></li></ul>
+
+    </footer>
+    <div class="article-entry article-index" itemprop="articleBody">
+      
+          
+        
+          <div class="toggle-content">
+            <p>超文本传输安全协议（HTTPS）是一种网络安全传输协议。在计算机网络上，HTTPS经由超文本传输协议进行通讯，但利用SSL/TLS来对数据包进行加密。HTTPS开发的主要目的，是提供对网络服务器的身份认证，保护交换数据的隐私与完整性。</p>
+<p>如今越来越多的个人网站使用HTTPS协议，所以感觉自己的网站不装这么一个逼就落伍了。看着自己的主页地址栏前面有一个绿色的<code>https</code>也感觉安全了许多<del>虽然并没有什么卵用</del>。</p>
+<h1 id="申请证书">申请证书</h1><p>要使用HTTPS协议首先要有一个值得信任的证书颁发机构给你的网站颁发的证书。目前免费的SSL证书颁发机构有很多，本文以从<strong>沃通</strong>上申请证书为例。</p>
+<h2 id="填写信息">填写信息</h2><p>首先到<a href="https://buy.wosign.com/free/" target="_blank" rel="external">沃通官网</a>注册账号并登录。</p>
+<p>然后会出现以下界面：</p>
+<p><img src="/img/ssl1.png" alt="填写信息"></p>
+<p>单次申请支持1个证书5个域名2年期限，证书可选中英文，提交就好了。</p>
+<h2 id="验证域名">验证域名</h2><p>签发机构需要验证域名的所有者，可以通过域名邮箱验证，也可以将指定信息放到网站上让其扫描以验证：</p>
+<p><img src="/img/ssl2.png" alt="验证域名"></p>
+<p>如果没有域名邮箱，将指定的html文件下载下来上传到服务器上网站的根目录下然后点下面的验证就可以了。</p>
+<h2 id="生成签名">生成签名</h2><p>到订单里选择签名生成方式，可以选择第一种方式系统自动生成，设置密码：</p>
+<p><img src="/img/ssl3.png" alt="生成签名"></p>
+<p>这个密码是最后解压证书用的，所以要记好。</p>
+<h2 id="下载证书">下载证书</h2><p>之后会弹出证书的下载链接，如果没有可以稍等片刻去订单里Get Cert，或者等待邮箱收到链接，输入刚才设置的密码就可下载压缩包了：</p>
+<p><img src="/img/ssl4.png" alt="下载证书"></p>
+<h1 id="部署证书">部署证书</h1><p>通过之前设置的密码解压压缩包，里面有各种服务器的证书，解压自己所用的服务器对应的证书即可。本文以<code>Nginx</code>服务器为例。</p>
+<h2 id="上传证书">上传证书</h2><p>解压后里面有一个<code>.crt</code>文件和一个<code>.key</code>文件，将它们上传到服务器上：</p>
+<pre><code>scp <span class="number">1_</span>your_domain_bundle.crt root<span class="variable">@your_ip</span><span class="symbol">:/usr/share/nginx/</span>
+scp <span class="number">2_</span>your_domain.crt root<span class="variable">@your_ip</span><span class="symbol">:/usr/share/nginx/</span>
+</code></pre><h2 id="监听443端口">监听443端口</h2><p>一般HTTPS使用443端口，因此要编辑<code>/etc/nginx/conf.d</code>下的<code>ssl.conf</code>文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">443</span>;</span><br><span class="line">    server_name  your_domain;</span><br><span class="line"></span><br><span class="line">    ssl                  on;</span><br><span class="line">    ssl_certificate      /usr/share/nginx/<span class="number">1</span>_your_domain_bundle.crt;</span><br><span class="line">    ssl_certificate_key  /usr/share/nginx/<span class="number">2</span>_your_domain.crt;</span><br><span class="line"></span><br><span class="line">    ssl_session_timeout  <span class="number">5</span>m;</span><br><span class="line"></span><br><span class="line">    ssl_protocols  SSLv2 SSLv3 TLSv1;</span><br><span class="line">    ssl_ciphers  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;</span><br><span class="line">    ssl_prefer_server_ciphers   on;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/www;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解开注释并将证书文件路径写进去保存，然后运行<code>nginx -s reload</code>重新加载配置文件即可。</p>
+<h2 id="强制跳转">强制跳转</h2><p>经过之前的配置必须在地址里写上<code>https</code>才会跳转到HTTPS域名，不然还是会跳转到HTTP的。</p>
+<p>所以还要编辑<code>/etc/nginx/conf.d</code>下的<code>ssl.conf</code>文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">80</span> default_server;</span><br><span class="line">    server_name  your_domain;</span><br><span class="line">    <span class="built_in">return</span> <span class="number">301</span> https://<span class="variable">$server_name</span><span class="variable">$request_uri</span>;        </span><br><span class="line"></span><br><span class="line">    include /etc/nginx/default.d/*.conf;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/www;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在<code>server_name</code>下面加一个301跳转就能强制跳转到<code>https</code>了。</p>
+<p>保存后运行<code>nginx -s reload</code>重新加载配置文件就搞定了。</p>
+
+          </div>
+          <div class="toggle-input article-more-link"><a>Read More +</a></div>
+        
+      
+    </div>
+
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-openwrt" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/12/openwrt/" class="article-date">
+  <time datetime="2015-12-12T04:12:12.000Z" itemprop="datePublished">2015-12-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网络/">网络</a>►<a class="article-category-link" href="/categories/网络/科学上网/">科学上网</a>
+  </div>
+
+  </div>
+  <div class="article-inner ">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="/img/opbanner.png" rel="gallery_cijskqars000zcafypsu63rnv">
         <img src="/img/opbanner.png" itemprop="image">
       </a>
     
@@ -143,14 +237,14 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/12/openwrt/">OpenWrt + ShadowSocks 实现路由器自动代理</a>
+      <a class="article-title" href="/2015/12/12/openwrt/">OpenWrt+ShadowSocks实现路由器自动代理</a>
     </h1>
   
 
       </header>
         
     <footer class="article-footer">
-      <a data-url="https://www.shintaku.cc/2015/12/12/openwrt/" data-id="cijk0pxao000cadydkxx81obc" class="article-share-link">Share</a>
+      <a data-url="https://www.shintaku.cc/2015/12/12/openwrt/" data-id="cijskqars000zcafypsu63rnv" class="article-share-link">Share</a>
       
         <a href="https://www.shintaku.cc/2015/12/12/openwrt/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -167,7 +261,8 @@
 <p><img src="/img/op703n.png" alt="TL-WR703N"></p>
 <p>由于这货只有一个网口，当路由器自动获取IP地址后，就进不去<a href="192.168.1.1">192.168.1.1</a>的管理界面了，虽然能上网，但每次换网线接头的时候都要捅菊花抹掉原来的设置。因此只有使用静态IP时才能正常使用这种路由器。这学期开学后现家里有一个<a href="http://www.netgear.com/home/products/networking/wifi-routers/wnr2200.aspx" target="_blank" rel="external">Netgear WNR2200</a>在吃灰，于是就把它拿到学校刷上了OpenWrt放宿舍给各种无线设备供网。</p>
 <p><img src="/img/op2200.png" alt="WNR2200"></p>
-<h1 id="刷入OpenWrt">刷入OpenWrt</h1><h2 id="准备工作">准备工作</h2><h3 id="路由器">路由器</h3><p>首先你要拥有一台可以刷入OpenWrt的路由器，至于OpenWrt支持那些设备，请到<a href="https://wiki.openwrt.org/toh/start" target="_blank" rel="external">Supported Devices</a>页面查看。本文以WNR2200为例。</p>
+<h1 id="刷入OpenWrt">刷入OpenWrt</h1><p><strong>OpenWrt</strong>是一个适合于嵌入式设备的Linux发行版。它提供了一个可添加软件包的可写的文件系统，使用者可以自由的选择应用程序和配置，并且可以使用一些适合某方面的应用的软件包来定制设备。</p>
+<h2 id="准备工作">准备工作</h2><h3 id="路由器">路由器</h3><p>首先你要拥有一台可以刷入OpenWrt的路由器，至于OpenWrt支持那些设备，请到<a href="https://wiki.openwrt.org/toh/start" target="_blank" rel="external">Supported Devices</a>页面查看。本文以WNR2200为例。</p>
 <h3 id="固件">固件</h3><p>前往<a href="https://downloads.openwrt.org/latest/" target="_blank" rel="external">Download</a>下载最新的对应设备的固件。注意固件列表里一半会有两种后缀：<code>squashfs-factory.img</code>和<code>squashfs-sysupgrade.img</code>，如果是从原厂固件刷到OpenWrt请用前者，如果是从OpenWrt升级请用后者。还有一种可能文件名以<code>NA</code>结尾<del>，可能是代表<code>North America</code></del>，基本上与不带<code>NA</code>的没什么区别。</p>
 <h3 id="环境">环境</h3><p>还需要一台有以太网接口的电脑和一根网线，电脑操作系统不限，但是<em>Windows</em>需要提前开启<code>TFTP</code>（因为这个功能系统默认是关闭的），具体操作就是进入<code>控制面板</code>-<code>程序</code>-<code>程序和功能</code>，</p>
 <p><img src="/img/optftp.png" alt="开启TFTP"></p>
@@ -278,13 +373,17 @@ opkg install <span class="number">6</span>relayd_2013-<span class="number">10</s
   <time datetime="2015-11-11T15:33:33.000Z" itemprop="datePublished">2015-11-11</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网络/">网络</a>►<a class="article-category-link" href="/categories/网络/科学上网/">科学上网</a>
+  </div>
+
   </div>
   <div class="article-inner ">
     
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="/img/ssbanner.png" rel="gallery_cijk0pxad0002adydz02dbojx">
+      <a class="article-gallery-img fancybox" href="/img/ssbanner.png" rel="gallery_cijskqark000kcafyrktk3wur">
         <img src="/img/ssbanner.png" itemprop="image">
       </a>
     
@@ -296,14 +395,14 @@ opkg install <span class="number">6</span>relayd_2013-<span class="number">10</s
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/11/shadowsocks/">Digital Ocean + ShadowSocks 实现校园网免流量上网</a>
+      <a class="article-title" href="/2015/11/11/shadowsocks/">Digital Ocean+ShadowSocks实现校园网免流量上网</a>
     </h1>
   
 
       </header>
         
     <footer class="article-footer">
-      <a data-url="https://www.shintaku.cc/2015/11/11/shadowsocks/" data-id="cijk0pxad0002adydz02dbojx" class="article-share-link">Share</a>
+      <a data-url="https://www.shintaku.cc/2015/11/11/shadowsocks/" data-id="cijskqark000kcafyrktk3wur" class="article-share-link">Share</a>
       
         <a href="https://www.shintaku.cc/2015/11/11/shadowsocks/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -336,7 +435,8 @@ opkg install <span class="number">6</span>relayd_2013-<span class="number">10</s
 </code></pre><p>成功登录后，首先要求更改root密码。如果希望以后本机登录不再输入密码，可以将本地的公钥上传到服务器端：</p>
 <pre><code>scp ~<span class="regexp">/.ssh/id</span>_rsa.pub root<span class="variable">@IP</span><span class="symbol">:~/</span>.ssh/authorized_keys
 </code></pre><p>如果本地<code>~/.ssh</code>目录下没有<code>id_rsa</code>这样的文件，可以使用<code>ssh-keygen</code>命令在该目录下生成。这样以后每次ssh连接时就不用再输密码了。</p>
-<h1 id="配置ShadowSocks">配置ShadowSocks</h1><h2 id="服务器端">服务器端</h2><h3 id="搭建服务">搭建服务</h3><p>SSH登录到VPS服务器后要使用pip安装ShadowSocks，所以先装<code>pip</code>。</p>
+<h1 id="配置ShadowSocks">配置ShadowSocks</h1><p>ShadowSocks是一个安全的socks5代理，它通过客户端以指定的密码、加密方式和端口连接服务器，成功连接到服务器后，客户端在用户的电脑上构建一个本地socks5代理。使用时将流量分到本地socks5代理，客户端将自动加密并转发流量到服务器，服务器以同样的加密方式将流量回传给客户端，以此实现代理上网。</p>
+<h2 id="服务器端">服务器端</h2><h3 id="搭建服务">搭建服务</h3><p>SSH登录到VPS服务器后要使用pip安装ShadowSocks，所以先装<code>pip</code>。</p>
 <p>如果服务器是基于Red Hat的系统（CentOS等等），使用命令：</p>
 <pre><code>yum <span class="keyword">install</span> python-setuptools &amp;&amp; easy_install pip
 </code></pre><p>如果是基于Debian的系统（Ubuntu等等），使用命令：</p>
@@ -366,8 +466,9 @@ bash serverSpeederInstaller.sh
 </code></pre><h2 id="本地客户端">本地客户端</h2><p>首先确定你可以获取到IPv6地址，最简便的方法就是打开<a href="http://bt.neu.edu.cn/" target="_blank" rel="external">六维空间</a>测试一下，如果可以打开就说明没问题。</p>
 <h3 id="Windows">Windows</h3><p><a href="https://github.com/shadowsocks/shadowsocks-windows/releases" target="_blank" rel="external">Shadowsocks for Windows</a></p>
 <h3 id="Mac_OS_X">Mac OS X</h3><p><a href="https://github.com/shadowsocks/shadowsocks-iOS/releases" target="_blank" rel="external">ShadowsocksX</a></p>
-<h3 id="Linux">Linux</h3><p>Linux的客户端安装方式同服务器端。</p>
-<p>各种平台上的服务器配置按照之前服务器端的设置填写即可，但是server地址记得<strong>填写IPv6的</strong>，然后设成全局代理。</p>
+<h3 id="Linux">Linux</h3><p>Linux的客户端安装方式同服务器端，只不过启动命令变成了：</p>
+<pre><code>sslocal -c <span class="regexp">/etc/</span>shadowsocks.json
+</code></pre><p>各种平台上的服务器配置按照之前服务器端的设置填写即可，但是server地址记得<strong>填写IPv6的</strong>，然后设成全局代理。</p>
 <p>这时Google一下自己的<a href="https://www.google.com/#newwindow=1&amp;safe=active&amp;q=ip" target="_blank" rel="external">IP</a>，如果地址确实是VPS的地址，就可以开始愉快的上网了。</p>
 
           </div>
@@ -390,13 +491,17 @@ bash serverSpeederInstaller.sh
   <time datetime="2015-10-18T13:11:11.000Z" itemprop="datePublished">2015-10-18</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/课程/">课程</a>►<a class="article-category-link" href="/categories/课程/课程设计/">课程设计</a>
+  </div>
+
   </div>
   <div class="article-inner ">
     
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="/img/qtbanner.png" rel="gallery_cijk0pxak0009adydtyvknfrw">
+      <a class="article-gallery-img fancybox" href="/img/qtbanner.png" rel="gallery_cijskqarp000scafymc0z6jgx">
         <img src="/img/qtbanner.png" itemprop="image">
       </a>
     
@@ -415,7 +520,7 @@ bash serverSpeederInstaller.sh
       </header>
         
     <footer class="article-footer">
-      <a data-url="https://www.shintaku.cc/2015/10/18/qt-problem/" data-id="cijk0pxak0009adydtyvknfrw" class="article-share-link">Share</a>
+      <a data-url="https://www.shintaku.cc/2015/10/18/qt-problem/" data-id="cijskqarp000scafymc0z6jgx" class="article-share-link">Share</a>
       
         <a href="https://www.shintaku.cc/2015/10/18/qt-problem/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -432,15 +537,19 @@ bash serverSpeederInstaller.sh
 <blockquote>
 <p>This application failed to start because it could not find or load the Qt platform plugin “windows”.</p>
 </blockquote>
-<p><img src="/img/qt0.png" alt="无法加载qwindows"><br>甚至<br><img src="/img/qt1.png" alt="Runtime"><br>于是现在亟待解决的问题就是如何能够找到所有所需依赖并能够将其打包引用。</p>
+<p><img src="/img/qtwindows.png" alt="无法加载qwindows"></p>
+<p>甚至</p>
+<p><img src="/img/qtruntime.png" alt="Runtime"><br>于是现在亟待解决的问题就是如何能够找到所有所需依赖并能够将其打包引用。</p>
 <h1 id="查找依赖工具">查找依赖工具</h1><p>通过阅读<a href="http://doc.qt.io/qt-5/windows-deployment.html#application-dependencies" target="_blank" rel="external">官方文档</a>发现，Qt里面内置了一个dll依赖性检查工具——<code>windeploy.exe</code>。这个程序应当在<code>~/Qt/Qt5.5.0/5.5/mingw492_32/bin/</code>下，通过命令提示符执行它可以得到<code>使用方法×1</code>：</p>
 <p>C:\Users\Shintaku&gt;C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe<br>    Please specify the binary or folder.</p>
 <pre><code>Usage: C:\Qt\Qt5.5.0\<span class="number">5.5</span>\mingw492_32\bin\windeployqt.exe [options] [<span class="built_in">files</span>]
 Qt Deploy Tool <span class="number">5.5</span>.0
 
-The simplest way <span class="built_in">to</span> use windeployqt is <span class="built_in">to</span> <span class="built_in">add</span> <span class="operator">the</span> bin <span class="built_in">directory</span> <span class="operator">of</span> your Qt installation (e.g. &lt;QT_DIR\bin&gt;) <span class="built_in">to</span> <span class="operator">the</span> PATH <span class="built_in">variable</span> <span class="operator">and</span> <span class="keyword">then</span> run:
+The simplest way <span class="built_in">to</span> use windeployqt is <span class="built_in">to</span> <span class="built_in">add</span> <span class="operator">the</span> bin <span class="built_in">directory</span> <span class="operator">of</span> your Qt installation 
+(e.g. &lt;QT_DIR\bin&gt;) <span class="built_in">to</span> <span class="operator">the</span> PATH <span class="built_in">variable</span> <span class="operator">and</span> <span class="keyword">then</span> run:
   windeployqt &lt;path-<span class="built_in">to</span>-app-binary&gt;
-If ICU, ANGLE, etc. are <span class="operator">not</span> <span class="operator">in</span> <span class="operator">the</span> bin <span class="built_in">directory</span>, they need <span class="built_in">to</span> be <span class="operator">in</span> <span class="operator">the</span> PATH <span class="built_in">variable</span>. If your application uses Qt Quick, run:
+If ICU, ANGLE, etc. are <span class="operator">not</span> <span class="operator">in</span> <span class="operator">the</span> bin <span class="built_in">directory</span>, they need <span class="built_in">to</span> be <span class="operator">in</span> <span class="operator">the</span> PATH <span class="built_in">variable</span>. 
+If your application uses Qt Quick, run:
   windeployqt <span class="comment">--qmldir &lt;path-to-app-qml-files&gt; &lt;path-to-app-binary&gt;</span>
 
 Options:
@@ -478,7 +587,8 @@ Options:
                                         Appx mapping <span class="built_in">file</span>
   <span class="comment">--verbose &lt;level&gt;          Verbose level.</span>
 
-Qt libraries can be added <span class="keyword">by</span> passing their name (-xml) <span class="operator">or</span> removed <span class="keyword">by</span> passing <span class="operator">the</span> name prepended <span class="keyword">by</span> <span class="comment">--no- (--no-xml). Available libraries:</span>
+Qt libraries can be added <span class="keyword">by</span> passing their name (-xml) <span class="operator">or</span> removed 
+<span class="keyword">by</span> passing <span class="operator">the</span> name prepended <span class="keyword">by</span> <span class="comment">--no- (--no-xml). Available libraries:</span>
 bluetooth clucene concurrent core declarative designer designercomponents
 enginio gui qthelp multimedia multimediawidgets multimediaquick network nfc
 opengl positioning printsupport qml qmltooling quick quickparticles quickwidgets
@@ -491,8 +601,8 @@ Arguments:
   [<span class="built_in">files</span>]                    Binaries <span class="operator">or</span> <span class="built_in">directory</span> containing <span class="operator">the</span> binary.
 </code></pre><p>发现当<code>windeploy</code>有一个参数为<code>二进制文件</code>时，会在其所在目录下生成该文件所依赖的所有文件。</p>
 <h1 id="提取依赖文件">提取依赖文件</h1><p>于是我们可以在任意目录下新建一个文件夹，然后将Qt编译生成的<code>可执行文件</code>复制到新文件夹下。<br>接下来在命令提示符里执行<code>windeploy yourProgram.exe</code>便可以将其所需依赖加入到新文件夹中了。</p>
-<pre><code>C:\Users\Shintaku&gt;C:\Qt\Qt5.<span class="number">5.0</span>\<span class="number">5.5</span>\mingw492_32\bin\windeployqt<span class="class">.exe</span> C:\Users\Shintaku\Desktop\release\Library<span class="class">.exe</span>
-C:\Users\Shintaku\Desktop\release\Library<span class="class">.exe</span> <span class="number">32</span> bit, release executable
+<pre><code>&gt; C:\Qt\Qt5.<span class="number">5.0</span>\<span class="number">5.5</span>\mingw492_32\bin\windeployqt<span class="class">.exe</span> Library<span class="class">.exe</span>
+Library<span class="class">.exe</span> <span class="number">32</span> bit, release executable
 Adding Qt5Svg <span class="keyword">for</span> qsvgicon<span class="class">.dll</span>
 Direct dependencies: Qt5Core Qt5Gui Qt5Sql Qt5Widgets
 All dependencies   : Qt5Core Qt5Gui Qt5Sql Qt5Widgets
@@ -541,7 +651,7 @@ Creating qt_lv<span class="class">.qm</span>...
 Creating qt_ru<span class="class">.qm</span>...
 Creating qt_sk<span class="class">.qm</span>...
 Creating qt_uk<span class="class">.qm</span>...
-</code></pre><p>强烈建议在此文件夹下运行一下程序试试，因为这个工具并不一定能将所有必需的依赖加进来，这时运行极有可能还会报<br><img src="/img/qt2.png" alt="系统错误"><br>如果这样，请移步<code>~/Qt/Qt5.5.0/5.5/mingw492_32/bin</code>下找到缺少的<code>.dll</code>文件将它们移到新文件夹下。经过这步检查，在开发环境下应该可以正常运行可执行文件了。</p>
+</code></pre><p>强烈建议在此文件夹下运行一下程序试试，因为这个工具并不一定能将所有必需的依赖加进来，这时运行极有可能还会报<br><img src="/img/qterror.png" alt="系统错误"><br>如果这样，请移步<code>~/Qt/Qt5.5.0/5.5/mingw492_32/bin</code>下找到缺少的<code>.dll</code>文件将它们移到新文件夹下。经过这步检查，在开发环境下应该可以正常运行可执行文件了。</p>
 <h1 id="修改引用路径">修改引用路径</h1><p>这时请把这个文件夹拷贝到其他运行环境上测试程序是否能成功运行：如果可以成功运行，那么请跳过这一步；如果不能成功运行，而且依旧报</p>
 <blockquote>
 <p>This application failed to start because it could not find or load the Qt platform plugin “windows”.</p>
@@ -549,6 +659,152 @@ Creating qt_uk<span class="class">.qm</span>...
 <p>则说明程序没有成功引用到动态链接库，这时应当修改源代码。<br>找到工程中的<code>main.cpp</code>文件，在主函数开头中加入一句<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QApplication::addLibraryPath(<span class="string">"."</span>);</span><br></pre></td></tr></table></figure></p>
 <p>重新编译并替换新文件夹中的.exe文件，再放到其他运行环境上就应该可以成功引用到链接库了。</p>
 <h1 id="打包程序发布">打包程序发布</h1><p>这时我们就可以打包程序了。我使用的是一款叫做Enigma Virtual Box的封装工具<a href="/file/enigmavb.exe">点此下载</a>，这个软件的名字和当年图灵破译的英格玛机一样。<br>软件装好后运行，从主界面选择输入目标文件和输出文件的路径，然后在下面<code>Files</code>里添加所有需要的链接库<br><img src="/img/qt3.png" alt="添加文件"><br>然后有一个<code>Files Options</code>里可选是否压缩文件，压缩后会比较小，然后点<code>Process</code>就行了<br><img src="/img/qt4.png" alt="压缩文件"><br>不久后会在选择的输出路径中生成最终打包好的程序，大功告成。</p>
+
+          </div>
+          <div class="toggle-input article-more-link"><a>Read More +</a></div>
+        
+      
+    </div>
+
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-goagent" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/08/goagent/" class="article-date">
+  <time datetime="2015-01-08T15:33:33.000Z" itemprop="datePublished">2015-01-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网络/">网络</a>►<a class="article-category-link" href="/categories/网络/科学上网/">科学上网</a>
+  </div>
+
+  </div>
+  <div class="article-inner ">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="/img/gabanner.png" rel="gallery_cijskqaq30000cafy6q13gbkq">
+        <img src="/img/gabanner.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/08/goagent/">GoAgent科学上网攻略</a>
+    </h1>
+  
+
+      </header>
+        
+    <footer class="article-footer">
+      <a data-url="https://www.shintaku.cc/2015/01/08/goagent/" data-id="cijskqaq30000cafy6q13gbkq" class="article-share-link">Share</a>
+      
+        <a href="https://www.shintaku.cc/2015/01/08/goagent/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GoAgent/">GoAgent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/科学上网/">科学上网</a></li></ul>
+
+    </footer>
+    <div class="article-entry article-index" itemprop="articleBody">
+      
+          
+        
+          <div class="toggle-content">
+            <p><strong><em>目前该项目已停止维护，并被开发者删除。有兴趣的童鞋请参考我fork下来的<a href="https://github.com/liangzhenduo0608/goagent" target="_blank" rel="external">3.2.3版本</a>。</em></strong></p>
+<blockquote>
+<p>翻出长城，我有思想准备。是要触及一些人的利益，是会触及一些人的利益，是会有不同的观点和看法的，而且，已经形成防火长城的这些机构社会联系蛮广泛的，是有舆论能力的。我们敢于翻墙，也就是说呀，像古人讲的，<strong>“敢同恶鬼争高下，不向霸王让寸分”</strong>，就是要有这种精神。在此呢，你比如说，也有不少人给Google泼脏水，包括给Twitter、给Facebook泼脏水。甚至，说到一〇四师从广场上路过，怎么开59式坦克，一派胡言！我感到非常气愤，啊，一派胡言。</p>
+<p>嗯，方滨兴，啊，本来是，这个工程院，这个很早以前就认可的院士，在北邮期间，当时当校长就当得很成功。清华著名教授唐泽圣，啊，那是他的老师，啊，对他非常欣赏。结果，有的这些头衔，就是怕说，担心会不会有人给人家造谣，说他通过当校长还想出点名，把他的几个职位一朝就全辞掉了，啊那是前年的事儿了，就全不干了。现在就几乎啊，嗯，在工程院，就是与病魔做一做斗争，啊，我对他做出的这种牺牲我都很感动的，啊。</p>
+</blockquote>
+<p>具体GoAgent怎么用呢，请参照以下步骤：</p>
+<h1 id="创建GAE应用">创建GAE应用</h1><h2 id="登录GAE">登录GAE</h2><p>GoAgent是使用跨平台语言Python开发、基于GPL自由软件协议的代理软件。它利用<code>Google App Engine (GAE)</code>的服务器充当代理。因此要使用GoAgent就需要一个Google帐户，前往<a href="http://appengine.google.com" target="_blank" rel="external">GAE</a>登录（有Google账号或者关联Google的账号直接登录即可，比如我的Google帐号就是hotmail的邮箱，深藏功与名）。</p>
+<p>其实这一步就是需要翻墙的，有些人到这一步就因为无法翻墙登陆不了GAE，从而无法使用GoAgent，陷入了死循环。</p>
+<h2 id="创建应用">创建应用</h2><p>成功登录后就可以点击上图中的<code>Create Application</code>创建新应用。每个账户可以创建至多25个应用（现在网上说10个的都是几年前的版本了）。</p>
+<p>首次创建还要验证一下手机号，格式为<code>+86XXXXXXXXXXX</code>，不久会收到一条验证短信，把验证码填进去就可以激活GAE账号了。</p>
+<p>接下来就可以创建应用了，填入二级域名的Appid和应用名称。Appid要求为6～30个字符，可以包含小写字母、数字和<code>-</code>，必须以字母开头，不得以<code>-</code>结尾。<code>[your_appid].appspot.com</code>就是你的应用地址了。Appid一定要牢牢记住。</p>
+<p><img src="/img/gacreate.png" alt="创建新应用"></p>
+<p>每一个应用提供1GB的流量，月流量是60GB（传出带宽是1GB/天，传入带宽1GB/天），虽然有如此的限制，但只是上网页用起来毫无压力，从来没有用超过呢。如果觉得一个应用的每天1G不够用，可以多创建几个。</p>
+<h1 id="本地配置">本地配置</h1><h2 id="下载GoAgent客户端">下载GoAgent客户端</h2><p>GoAgent的项目主页已经从<a href="https://code.google.com/p/goagent/" target="_blank" rel="external">Google Code</a>转移到<a href="https://github.com/goagent/goagent" target="_blank" rel="external">GitHub</a>了，但是GitHub上的项目也被移除了，所以还想尝试的童鞋请到我fork的分支上下载<a href="https://github.com/liangzhenduo0608/goagent" target="_blank" rel="external">GoAgent 3.2.3</a>。</p>
+<p><img src="/img/gagithub.png" alt="GitHub上的GoAgent项目"></p>
+<p>可以把这个项目clone到本地：</p>
+<pre><code>git clone <span class="string">https:</span><span class="comment">//github.com/liangzhenduo0608/goagent</span>
+</code></pre><p>或者Download ZIP并解压出来。</p>
+<h2 id="上传Python服务">上传Python服务</h2><p>进到server目录下，Windows用户以管理员身份运行<code>uploader.bat</code>，Mac/Linux用户用Python运行<code>uploader.py</code>，按照提示依次填入Appid、Email地址和口令（如果app创建时开启了两步验证，口令需要填入两步验证设置的密码，但现在创建的app基本上都跳过设置两步验证了，所以填邮Google帐户密码就行了）。上传成功会出现如下界面：</p>
+<pre><code>警告：建议先启动 goagent 客户端或者 VPN 然后再上传，如果您的 VPN 已经打开的话，请按回车键继续。
+
+===============================================================
+ GoAgent服务端部署程序, 开始上传 gae 应用文件夹
+ Linux/Mac 用户, 请使用 python uploader.py 来上传应用
+===============================================================
+
+请输入您的appid, 多个appid请用|号隔开
+注意：appid 请勿包含 ios/android/mobile 等字样，否则可能被某些网站识别成移动设备。
+APPID: your_appid
+Application: your_appid
+Host: appengine.google.com
+Rolling back the <span class="operator"><span class="keyword">update</span>.
+Email: your_google_account
+<span class="keyword">Password</span> <span class="keyword">for</span> your_google_account: 
+Application: your_appid;</span> version: 1
+Host: appengine.google.com
+
+Starting <span class="operator"><span class="keyword">update</span> <span class="keyword">of</span> app: your_appid, <span class="keyword">version</span> <span class="number">1</span>
+Scanning files <span class="keyword">on</span> <span class="keyword">local</span> disk.
+Cloning <span class="number">1</span> static file.
+Cloning <span class="number">3</span> application files.
+Compilation <span class="keyword">starting</span>.
+Compilation completed.
+<span class="keyword">Starting</span> deployment.
+Checking <span class="keyword">if</span> deployment succeeded.
+Deployment successful.
+Checking <span class="keyword">if</span> updated app verion <span class="keyword">is</span> serving.
+Completed <span class="keyword">update</span> <span class="keyword">of</span> app: your_appid, <span class="keyword">version</span> <span class="number">1</span>
+
+上传成功，请不要忘记编辑proxy.ini把你的appid填进去，谢谢。按回车键退出程序。</span>
+</code></pre><p>验证是否成功也可以打开<code>https://[your_appid].appspot.com/_gh/</code>查看状态，像下面一样就说明成功了：</p>
+<blockquote>
+<p>GoAgent Python Server 3.2.0 works, deployed at 2015-01-08 23:33:33</p>
+</blockquote>
+<p>这里请注意一下，如果你用的是老版本的goagent比如2.x.x的域名后缀应为<code>*.appspot.com/2</code>，而新版本的3.x.x的域名后缀应为<code>*.appspot.com/_gh/</code>，因此之前用老版本而现在更新到新版本的用户需要重新上传。</p>
+<h2 id="配置proxy-ini">配置proxy.ini</h2><p>这一步做的就是上一步终端中最后一行说的，修改<code>/local/proxy.ini</code>中<code>gae</code>下的<code>appid</code>和<code>password</code>并保存：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[gae]</span><br><span class="line"><span class="built_in">enable</span> = <span class="number">1</span></span><br><span class="line">appid = your_appid</span><br><span class="line">password = your_password</span><br><span class="line">path = /_gh/</span><br><span class="line">mode = https</span><br><span class="line">ipv6 = <span class="number">0</span></span><br><span class="line">sslversion = TLSv1</span><br><span class="line">window = <span class="number">7</span></span><br><span class="line">cachesock = <span class="number">1</span></span><br><span class="line">headfirst = <span class="number">1</span></span><br><span class="line">keepalive = <span class="number">0</span></span><br><span class="line">obfuscate = <span class="number">0</span></span><br><span class="line">validate = <span class="number">0</span></span><br><span class="line">transport = <span class="number">0</span></span><br><span class="line">options =</span><br><span class="line">regions =</span><br></pre></td></tr></table></figure>
+<h1 id="启动服务">启动服务</h1><h2 id="运行GoAgent">运行GoAgent</h2><p>如果以上步骤都正确的话，Windows以管理员身份运行local下的goagent.exe了，Mac/Linux用户用Python运行proxy.py，应该会出现如下界面：</p>
+<pre><code>------------------------------------------------------
+GoAgent <span class="string">Version    :</span> <span class="number">3.2</span>.3 (python<span class="regexp">/2.7.1 gevent/</span><span class="number">1.0</span> pyopenssl/<span class="number">0.13</span>.1)
+Listen <span class="string">Address     :</span> <span class="number">127.0</span>.0.1:<span class="number">8087</span>
+GAE <span class="string">Mode           :</span> https (TLSv1)
+GAE <span class="string">APPID          :</span> your_appid
+Pac <span class="string">Server         :</span> <span class="string">http:</span><span class="comment">//192.168.1.101:8086/proxy.pac</span>
+Pac <span class="string">File           :</span> <span class="string">file:</span><span class="comment">///goagent-3.0/local/proxy.pac</span>
+------------------------------------------------------ 
+</code></pre><p>如果没有出现其他警告或错误，就说明配置成功了。</p>
+<h2 id="安装Chrome插件">安装Chrome插件</h2><p>GoAgent可以设置全局代理，也可以设置浏览器代理。因此下面提供的是使用Chrome浏览器插件代理的方法。</p>
+<p>从Chrome浏览器打开<a href="https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif?hl=cn-ZH" target="_blank" rel="external">Proxy SwitchyOmega</a>并添加到浏览器，在其配置界面<code>Import/Export</code>里把<code>/local/SwitchyOptions.bak</code>导入进去：</p>
+<p><img src="/img/gaimport.png" alt="导入配置"></p>
+<p>可以从浏览器右上角小圈圈插件那切换各种模式：</p>
+<ul>
+<li>Direct是不通过代理直接连接</li>
+<li>GoAgent是完全通过代理访问</li>
+<li>Auto Switch是自动切换，根据设置判定哪些网站通过代理，哪些网站不通过代理。</li>
+</ul>
+<p>个人比较倾向使用自动切换模式，也比较省流量，也防止有些内地的网站因为代理而打不开。也可以在<code>Switch rules</code>里添加需要自动代理的网站。</p>
+<h2 id="导入证书">导入证书</h2><p>打开chrome设置-管理证书-受信任的根证书颁发机构，将<code>/local/CA.crt</code>导入到进去：</p>
+<p><img src="/img/gacert.png" alt="导入证书"></p>
+<p>至此，以后每次需要代理的时候只要运行goagent.exe或proxy.py就行了，此时你就可以通过Google公司加州山景城的服务器畅游墙外的世界了。</p>
+<blockquote>
+<p>这个大家啊，如果，对翻墙有什么想法，有什么看法，尽可以提。我觉得，我相信，广大记者朋友，是客观的。这个也欢迎大家，有机会，到墙外去，墙外人非常热心，而且这些年的这个发展，这个大家团结一致、同心同德，已经取得了很大的进步。我相信，我们这些这个记者朋友们，你们对今天翻墙，放出干货的报道，会是客观的，准确的。好，谢谢大家。</p>
+</blockquote>
 
           </div>
           <div class="toggle-input article-more-link"><a>Read More +</a></div>
@@ -585,7 +841,7 @@ Creating qt_uk<span class="class">.qm</span>...
       </header>
         
     <footer class="article-footer">
-      <a data-url="https://www.shintaku.cc/1970/01/01/hello-world/" data-id="cijk0px8w0000adydfa4fc87z" class="article-share-link">Share</a>
+      <a data-url="https://www.shintaku.cc/1970/01/01/hello-world/" data-id="cijskqarw0016cafygu3vxyca" class="article-share-link">Share</a>
       
         <a href="https://www.shintaku.cc/1970/01/01/hello-world/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -628,6 +884,13 @@ Creating qt_uk<span class="class">.qm</span>...
 <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/网络/科学上网/">科学上网</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/网站部署/">网站部署</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/课程/">课程</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/课程/课程设计/">课程设计</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -636,38 +899,63 @@ Creating qt_uk<span class="class">.qm</span>...
       <ul>
         
           <li>
+            <a class="text" href="/2015/12/30/ssl/">
+              
+                <i class="fa-paperclip"></i> 
+              
+            SSL证书的申请与配置</a>
+          </li>
+        
+          <li>
             <a class="text" href="/2015/12/12/openwrt/">
               
-                <i class="icon-file-o"></i> 
+                <i class="fa-paperclip"></i> 
               
-            OpenWrt + ShadowSocks 实现路由器自动代理</a>
+            OpenWrt+ShadowSocks实现路由器自动代理</a>
           </li>
         
           <li>
             <a class="text" href="/2015/11/11/shadowsocks/">
               
-                <i class="icon-file-o"></i> 
+                <i class="fa-paperclip"></i> 
               
-            Digital Ocean + ShadowSocks 实现校园网免流量上网</a>
+            Digital Ocean+ShadowSocks实现校园网免流量上网</a>
           </li>
         
           <li>
             <a class="text" href="/2015/10/18/qt-problem/">
               
-                <i class="icon-file-o"></i> 
+                <i class="fa-paperclip"></i> 
               
             Qt5.5程序的打包与发布</a>
           </li>
         
           <li>
+            <a class="text" href="/2015/01/08/goagent/">
+              
+                <i class="fa-paperclip"></i> 
+              
+            GoAgent科学上网攻略</a>
+          </li>
+        
+          <li>
             <a class="text" href="/1970/01/01/hello-world/">
               
-                <i class="icon-file-o"></i> 
+                <i class="fa-paperclip"></i> 
               
             Hello World</a>
           </li>
         
       </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Digital-Ocean/" style="font-size: 10px;">Digital Ocean</a> <a href="/tags/GoAgent/" style="font-size: 10px;">GoAgent</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/ShadowSocks/" style="font-size: 15px;">ShadowSocks</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/科学上网/" style="font-size: 20px;">科学上网</a> <a href="/tags/网站/" style="font-size: 10px;">网站</a>
     </div>
   </div>
 
@@ -680,19 +968,19 @@ Creating qt_uk<span class="class">.qm</span>...
 	      <li><a href="https://developers.google.com/" target="_blank" title="Google Developers"><i class="fa-google"></i> Google Developers </a></li>
 	      <li><a href="https://liangzhenduo0608.github.io/" target="_blank" title="github.io"><i class="fa-github-alt"></i> Recursion </a></li>
           <li><a href="http://wiki.shintaku.cc/" target="_blank" title="Wiki"><i class="fa-wikipedia-w"></i> My Wiki </a></li>
-	      <li><a href="http://xzjqx.cn/" target="_blank" title="笑卒渐清晰"><i class="fa-wordpress"></i> xzjqx's blog </a></li>
-	      <li><a href="http://blog.muyujinxi.cn/" target="_blank" title="春哥的博客"><i class="fa-wordpress"></i> Spring bro's blog </a></li>
+	      <li><a href="http://xzjqx.cn/" target="_blank" title="笑卒渐清晰"><i class="fa-wordpress"></i> 笑卒渐清晰 </a></li>
+	      <li><a href="http://115.159.72.55/wordpress/" target="_blank" title="暮雨今夕"><i class="fa-wordpress"></i> 暮雨今夕 </a></li>
     	</ul>
     </div>
 </div>
 
 
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Ad_01 -->
+<!-- Ad1 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-9920928489161252"
-     data-ad-slot="9229273721"
+     data-ad-slot="1227035320"
      data-ad-format="auto"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
@@ -712,23 +1000,34 @@ Creating qt_uk<span class="class">.qm</span>...
       </div>
       <footer id="footer">
   
-  <div class="outer">    
+  <div class="outer" align="center">    
     <div class="social-group">
       
-      <a href="https://github.com/liangzhenduo0608" target="_blank" title="GitHub"><i class="fa-github-square"></i></a>
+      <a href="https://github.com/liangzhenduo0608" target="_blank" title="GitHub"><i class="fa-github"></i></a>
       
       
-      <a href="https://plus.google.com/114761524022260759157" target="_blank" title="Google+"><i class="fa-google-plus-square"></i></a>
+      <a href="https://plus.google.com/114761524022260759157" target="_blank" title="Google+"><i class="fa-google-plus"></i></a>
       
       
       <a href="https://www.facebook.com/profile.php?id=100005630052910" target="_blank" title="Facebook"><i class="fa-facebook-square"></i></a>
       
       
-      <a href="https://twitter.com/liangzhenduo" target="_blank" title="Twitter" ><i class="fa-twitter-square"></i></a>
+      <a href="https://twitter.com/liangzhenduo" target="_blank" title="Twitter" ><i class="fa-twitter"></i></a>
       
+      
+      <a href="http://weibo.com/378950608" target="_blank" title="Weibo" ><i class="fa-weibo"></i></a>
+      
+      
+      <a href="http://www.renren.com/357959793" target="_blank" title="Renren" ><i class="fa-renren"></i></a>
+      
+      
+      <a href="http://user.qzone.qq.com/825875484" target="_blank" title="Qzone" ><i class="fa-qq"></i></a>
+      
+      
+      <a href="mailto:liangzhenduo0608@hotmail.com" target="_blank" title="Email" ><i class="fa-send-o"></i></a>
       
     </div>
-    <div id="footer-info" class="inner">
+    <div id="footer-info" class="inner" align="center">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/morris821028/hexo-theme-landscape" target="_blank" title="landscape">landscape</a>     &copy; 2016 Shintaku 
     </div>  
 
@@ -747,7 +1046,7 @@ Creating qt_uk<span class="class">.qm</span>...
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
   
-    <a href="/picture" class="mobile-nav-link">Pictures</a>
+    <a href="/gallery" class="mobile-nav-link">Gallery</a>
   
     <a href="/works" class="mobile-nav-link">Works</a>
   

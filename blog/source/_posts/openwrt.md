@@ -1,6 +1,7 @@
-title: OpenWrt + ShadowSocks 实现路由器自动代理
+title: OpenWrt+ShadowSocks实现路由器自动代理
 date: 2015-12-12 12:12:12
 tags: [ShadowSocks, OpenWrt, 科学上网]
+categories: [网络, 科学上网]
 photos:
 	- /img/opbanner.png
 ---
@@ -14,6 +15,8 @@ photos:
 ![WNR2200](/img/op2200.png)
 
 #刷入OpenWrt
+**OpenWrt**是一个适合于嵌入式设备的Linux发行版。它提供了一个可添加软件包的可写的文件系统，使用者可以自由的选择应用程序和配置，并且可以使用一些适合某方面的应用的软件包来定制设备。
+
 ##准备工作
 ###路由器
 首先你要拥有一台可以刷入OpenWrt的路由器，至于OpenWrt支持那些设备，请到[Supported Devices](https://wiki.openwrt.org/toh/start)页面查看。本文以WNR2200为例。

@@ -17,7 +17,7 @@ This application failed to start because it could not find or load the Qt">
 
 This application failed to start because it could not find or load the Qt">
 <meta property="og:image" content="https://www.shintaku.cc/img/qtbanner.png">
-<meta property="og:updated_time" content="2016-01-17T11:40:04.000Z">
+<meta property="og:updated_time" content="2016-01-24T13:20:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Qt5.5程序的打包与发布">
 <meta name="twitter:description" content="因为要做C＋＋软件实习的大作业，所以选择了易于上手的Qt作为图形化界面程序开发框架，IDE自然就是Qt Creator了。但是Qt程序的打包发布却是不接地气，因为依赖实在是太多了。有的时候加好依赖后在自己的开发环境上可以运行，但脱离开发环境却依旧报
@@ -103,7 +103,7 @@ This application failed to start because it could not find or load the Qt">
           
         
           
-            <a class="main-nav-link" href="/picture"><i class=fa-camera title='Pictures'></i> Pictures</a>
+            <a class="main-nav-link" href="/gallery"><i class=fa-camera title='Gallery'></i> Gallery</a>
           
         
           
@@ -131,13 +131,17 @@ This application failed to start because it could not find or load the Qt">
   <time datetime="2015-10-18T13:11:11.000Z" itemprop="datePublished">2015-10-18</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/课程/">课程</a>►<a class="article-category-link" href="/categories/课程/课程设计/">课程设计</a>
+  </div>
+
   </div>
   <div class="article-inner ">
     
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="/img/qtbanner.png" rel="gallery_cijk0pxak0009adydtyvknfrw">
+      <a class="article-gallery-img fancybox" href="/img/qtbanner.png" rel="gallery_cijskqarp000scafymc0z6jgx">
         <img src="/img/qtbanner.png" itemprop="image">
       </a>
     
@@ -156,7 +160,7 @@ This application failed to start because it could not find or load the Qt">
       </header>
         
     <footer class="article-footer">
-      <a data-url="https://www.shintaku.cc/2015/10/18/qt-problem/" data-id="cijk0pxak0009adydtyvknfrw" class="article-share-link">Share</a>
+      <a data-url="https://www.shintaku.cc/2015/10/18/qt-problem/" data-id="cijskqarp000scafymc0z6jgx" class="article-share-link">Share</a>
       
         <a href="https://www.shintaku.cc/2015/10/18/qt-problem/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -179,15 +183,19 @@ This application failed to start because it could not find or load the Qt">
 <blockquote>
 <p>This application failed to start because it could not find or load the Qt platform plugin “windows”.</p>
 </blockquote>
-<p><img src="/img/qt0.png" alt="无法加载qwindows"><br>甚至<br><img src="/img/qt1.png" alt="Runtime"><br>于是现在亟待解决的问题就是如何能够找到所有所需依赖并能够将其打包引用。</p>
+<p><img src="/img/qtwindows.png" alt="无法加载qwindows"></p>
+<p>甚至</p>
+<p><img src="/img/qtruntime.png" alt="Runtime"><br>于是现在亟待解决的问题就是如何能够找到所有所需依赖并能够将其打包引用。</p>
 <h1 id="查找依赖工具">查找依赖工具</h1><p>通过阅读<a href="http://doc.qt.io/qt-5/windows-deployment.html#application-dependencies" target="_blank" rel="external">官方文档</a>发现，Qt里面内置了一个dll依赖性检查工具——<code>windeploy.exe</code>。这个程序应当在<code>~/Qt/Qt5.5.0/5.5/mingw492_32/bin/</code>下，通过命令提示符执行它可以得到<code>使用方法×1</code>：</p>
 <p>C:\Users\Shintaku&gt;C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe<br>    Please specify the binary or folder.</p>
 <pre><code>Usage: C:\Qt\Qt5.5.0\<span class="number">5.5</span>\mingw492_32\bin\windeployqt.exe [options] [<span class="built_in">files</span>]
 Qt Deploy Tool <span class="number">5.5</span>.0
 
-The simplest way <span class="built_in">to</span> use windeployqt is <span class="built_in">to</span> <span class="built_in">add</span> <span class="operator">the</span> bin <span class="built_in">directory</span> <span class="operator">of</span> your Qt installation (e.g. &lt;QT_DIR\bin&gt;) <span class="built_in">to</span> <span class="operator">the</span> PATH <span class="built_in">variable</span> <span class="operator">and</span> <span class="keyword">then</span> run:
+The simplest way <span class="built_in">to</span> use windeployqt is <span class="built_in">to</span> <span class="built_in">add</span> <span class="operator">the</span> bin <span class="built_in">directory</span> <span class="operator">of</span> your Qt installation 
+(e.g. &lt;QT_DIR\bin&gt;) <span class="built_in">to</span> <span class="operator">the</span> PATH <span class="built_in">variable</span> <span class="operator">and</span> <span class="keyword">then</span> run:
   windeployqt &lt;path-<span class="built_in">to</span>-app-binary&gt;
-If ICU, ANGLE, etc. are <span class="operator">not</span> <span class="operator">in</span> <span class="operator">the</span> bin <span class="built_in">directory</span>, they need <span class="built_in">to</span> be <span class="operator">in</span> <span class="operator">the</span> PATH <span class="built_in">variable</span>. If your application uses Qt Quick, run:
+If ICU, ANGLE, etc. are <span class="operator">not</span> <span class="operator">in</span> <span class="operator">the</span> bin <span class="built_in">directory</span>, they need <span class="built_in">to</span> be <span class="operator">in</span> <span class="operator">the</span> PATH <span class="built_in">variable</span>. 
+If your application uses Qt Quick, run:
   windeployqt <span class="comment">--qmldir &lt;path-to-app-qml-files&gt; &lt;path-to-app-binary&gt;</span>
 
 Options:
@@ -225,7 +233,8 @@ Options:
                                         Appx mapping <span class="built_in">file</span>
   <span class="comment">--verbose &lt;level&gt;          Verbose level.</span>
 
-Qt libraries can be added <span class="keyword">by</span> passing their name (-xml) <span class="operator">or</span> removed <span class="keyword">by</span> passing <span class="operator">the</span> name prepended <span class="keyword">by</span> <span class="comment">--no- (--no-xml). Available libraries:</span>
+Qt libraries can be added <span class="keyword">by</span> passing their name (-xml) <span class="operator">or</span> removed 
+<span class="keyword">by</span> passing <span class="operator">the</span> name prepended <span class="keyword">by</span> <span class="comment">--no- (--no-xml). Available libraries:</span>
 bluetooth clucene concurrent core declarative designer designercomponents
 enginio gui qthelp multimedia multimediawidgets multimediaquick network nfc
 opengl positioning printsupport qml qmltooling quick quickparticles quickwidgets
@@ -238,8 +247,8 @@ Arguments:
   [<span class="built_in">files</span>]                    Binaries <span class="operator">or</span> <span class="built_in">directory</span> containing <span class="operator">the</span> binary.
 </code></pre><p>发现当<code>windeploy</code>有一个参数为<code>二进制文件</code>时，会在其所在目录下生成该文件所依赖的所有文件。</p>
 <h1 id="提取依赖文件">提取依赖文件</h1><p>于是我们可以在任意目录下新建一个文件夹，然后将Qt编译生成的<code>可执行文件</code>复制到新文件夹下。<br>接下来在命令提示符里执行<code>windeploy yourProgram.exe</code>便可以将其所需依赖加入到新文件夹中了。</p>
-<pre><code>C:\Users\Shintaku&gt;C:\Qt\Qt5.<span class="number">5.0</span>\<span class="number">5.5</span>\mingw492_32\bin\windeployqt<span class="class">.exe</span> C:\Users\Shintaku\Desktop\release\Library<span class="class">.exe</span>
-C:\Users\Shintaku\Desktop\release\Library<span class="class">.exe</span> <span class="number">32</span> bit, release executable
+<pre><code>&gt; C:\Qt\Qt5.<span class="number">5.0</span>\<span class="number">5.5</span>\mingw492_32\bin\windeployqt<span class="class">.exe</span> Library<span class="class">.exe</span>
+Library<span class="class">.exe</span> <span class="number">32</span> bit, release executable
 Adding Qt5Svg <span class="keyword">for</span> qsvgicon<span class="class">.dll</span>
 Direct dependencies: Qt5Core Qt5Gui Qt5Sql Qt5Widgets
 All dependencies   : Qt5Core Qt5Gui Qt5Sql Qt5Widgets
@@ -288,7 +297,7 @@ Creating qt_lv<span class="class">.qm</span>...
 Creating qt_ru<span class="class">.qm</span>...
 Creating qt_sk<span class="class">.qm</span>...
 Creating qt_uk<span class="class">.qm</span>...
-</code></pre><p>强烈建议在此文件夹下运行一下程序试试，因为这个工具并不一定能将所有必需的依赖加进来，这时运行极有可能还会报<br><img src="/img/qt2.png" alt="系统错误"><br>如果这样，请移步<code>~/Qt/Qt5.5.0/5.5/mingw492_32/bin</code>下找到缺少的<code>.dll</code>文件将它们移到新文件夹下。经过这步检查，在开发环境下应该可以正常运行可执行文件了。</p>
+</code></pre><p>强烈建议在此文件夹下运行一下程序试试，因为这个工具并不一定能将所有必需的依赖加进来，这时运行极有可能还会报<br><img src="/img/qterror.png" alt="系统错误"><br>如果这样，请移步<code>~/Qt/Qt5.5.0/5.5/mingw492_32/bin</code>下找到缺少的<code>.dll</code>文件将它们移到新文件夹下。经过这步检查，在开发环境下应该可以正常运行可执行文件了。</p>
 <h1 id="修改引用路径">修改引用路径</h1><p>这时请把这个文件夹拷贝到其他运行环境上测试程序是否能成功运行：如果可以成功运行，那么请跳过这一步；如果不能成功运行，而且依旧报</p>
 <blockquote>
 <p>This application failed to start because it could not find or load the Qt platform plugin “windows”.</p>
@@ -310,15 +319,15 @@ Creating qt_uk<span class="class">.qm</span>...
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Digital Ocean + ShadowSocks 实现校园网免流量上网
+          Digital Ocean+ShadowSocks实现校园网免流量上网
         
       </div>
     </a>
   
   
-    <a href="/1970/01/01/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/01/08/goagent/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">GoAgent科学上网攻略</div>
     </a>
   
 </nav>
@@ -328,11 +337,11 @@ Creating qt_uk<span class="class">.qm</span>...
 
 
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Ad_02 -->
+<!-- Ad2 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-9920928489161252"
-     data-ad-slot="1706006921"
+     data-ad-slot="2703768522"
      data-ad-format="auto"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
@@ -352,6 +361,13 @@ Creating qt_uk<span class="class">.qm</span>...
 <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/网络/科学上网/">科学上网</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/网站部署/">网站部署</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/课程/">课程</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/课程/课程设计/">课程设计</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -360,38 +376,63 @@ Creating qt_uk<span class="class">.qm</span>...
       <ul>
         
           <li>
+            <a class="text" href="/2015/12/30/ssl/">
+              
+                <i class="fa-paperclip"></i> 
+              
+            SSL证书的申请与配置</a>
+          </li>
+        
+          <li>
             <a class="text" href="/2015/12/12/openwrt/">
               
-                <i class="icon-file-o"></i> 
+                <i class="fa-paperclip"></i> 
               
-            OpenWrt + ShadowSocks 实现路由器自动代理</a>
+            OpenWrt+ShadowSocks实现路由器自动代理</a>
           </li>
         
           <li>
             <a class="text" href="/2015/11/11/shadowsocks/">
               
-                <i class="icon-file-o"></i> 
+                <i class="fa-paperclip"></i> 
               
-            Digital Ocean + ShadowSocks 实现校园网免流量上网</a>
+            Digital Ocean+ShadowSocks实现校园网免流量上网</a>
           </li>
         
           <li>
             <a class="text" href="/2015/10/18/qt-problem/">
               
-                <i class="icon-file-o"></i> 
+                <i class="fa-paperclip"></i> 
               
             Qt5.5程序的打包与发布</a>
           </li>
         
           <li>
+            <a class="text" href="/2015/01/08/goagent/">
+              
+                <i class="fa-paperclip"></i> 
+              
+            GoAgent科学上网攻略</a>
+          </li>
+        
+          <li>
             <a class="text" href="/1970/01/01/hello-world/">
               
-                <i class="icon-file-o"></i> 
+                <i class="fa-paperclip"></i> 
               
             Hello World</a>
           </li>
         
       </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Digital-Ocean/" style="font-size: 10px;">Digital Ocean</a> <a href="/tags/GoAgent/" style="font-size: 10px;">GoAgent</a> <a href="/tags/OpenWrt/" style="font-size: 10px;">OpenWrt</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/ShadowSocks/" style="font-size: 15px;">ShadowSocks</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/科学上网/" style="font-size: 20px;">科学上网</a> <a href="/tags/网站/" style="font-size: 10px;">网站</a>
     </div>
   </div>
 
@@ -404,19 +445,19 @@ Creating qt_uk<span class="class">.qm</span>...
 	      <li><a href="https://developers.google.com/" target="_blank" title="Google Developers"><i class="fa-google"></i> Google Developers </a></li>
 	      <li><a href="https://liangzhenduo0608.github.io/" target="_blank" title="github.io"><i class="fa-github-alt"></i> Recursion </a></li>
           <li><a href="http://wiki.shintaku.cc/" target="_blank" title="Wiki"><i class="fa-wikipedia-w"></i> My Wiki </a></li>
-	      <li><a href="http://xzjqx.cn/" target="_blank" title="笑卒渐清晰"><i class="fa-wordpress"></i> xzjqx's blog </a></li>
-	      <li><a href="http://blog.muyujinxi.cn/" target="_blank" title="春哥的博客"><i class="fa-wordpress"></i> Spring bro's blog </a></li>
+	      <li><a href="http://xzjqx.cn/" target="_blank" title="笑卒渐清晰"><i class="fa-wordpress"></i> 笑卒渐清晰 </a></li>
+	      <li><a href="http://115.159.72.55/wordpress/" target="_blank" title="暮雨今夕"><i class="fa-wordpress"></i> 暮雨今夕 </a></li>
     	</ul>
     </div>
 </div>
 
 
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Ad_01 -->
+<!-- Ad1 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-9920928489161252"
-     data-ad-slot="9229273721"
+     data-ad-slot="1227035320"
      data-ad-format="auto"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
@@ -436,23 +477,34 @@ Creating qt_uk<span class="class">.qm</span>...
       </div>
       <footer id="footer">
   
-  <div class="outer">    
+  <div class="outer" align="center">    
     <div class="social-group">
       
-      <a href="https://github.com/liangzhenduo0608" target="_blank" title="GitHub"><i class="fa-github-square"></i></a>
+      <a href="https://github.com/liangzhenduo0608" target="_blank" title="GitHub"><i class="fa-github"></i></a>
       
       
-      <a href="https://plus.google.com/114761524022260759157" target="_blank" title="Google+"><i class="fa-google-plus-square"></i></a>
+      <a href="https://plus.google.com/114761524022260759157" target="_blank" title="Google+"><i class="fa-google-plus"></i></a>
       
       
       <a href="https://www.facebook.com/profile.php?id=100005630052910" target="_blank" title="Facebook"><i class="fa-facebook-square"></i></a>
       
       
-      <a href="https://twitter.com/liangzhenduo" target="_blank" title="Twitter" ><i class="fa-twitter-square"></i></a>
+      <a href="https://twitter.com/liangzhenduo" target="_blank" title="Twitter" ><i class="fa-twitter"></i></a>
       
+      
+      <a href="http://weibo.com/378950608" target="_blank" title="Weibo" ><i class="fa-weibo"></i></a>
+      
+      
+      <a href="http://www.renren.com/357959793" target="_blank" title="Renren" ><i class="fa-renren"></i></a>
+      
+      
+      <a href="http://user.qzone.qq.com/825875484" target="_blank" title="Qzone" ><i class="fa-qq"></i></a>
+      
+      
+      <a href="mailto:liangzhenduo0608@hotmail.com" target="_blank" title="Email" ><i class="fa-send-o"></i></a>
       
     </div>
-    <div id="footer-info" class="inner">
+    <div id="footer-info" class="inner" align="center">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by <a href="https://github.com/morris821028/hexo-theme-landscape" target="_blank" title="landscape">landscape</a>     &copy; 2016 Shintaku 
     </div>  
 
@@ -471,7 +523,7 @@ Creating qt_uk<span class="class">.qm</span>...
   
     <a href="/tags" class="mobile-nav-link">Tags</a>
   
-    <a href="/picture" class="mobile-nav-link">Pictures</a>
+    <a href="/gallery" class="mobile-nav-link">Gallery</a>
   
     <a href="/works" class="mobile-nav-link">Works</a>
   

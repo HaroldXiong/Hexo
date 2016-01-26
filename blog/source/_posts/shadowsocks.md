@@ -1,6 +1,7 @@
-title: Digital Ocean + ShadowSocks 实现校园网免流量上网
+title: Digital Ocean+ShadowSocks实现校园网免流量上网
 date: 2015-11-11 23:33:33
 tags: [ShadowSocks, Digital Ocean, 科学上网]
+categories: [网络, 科学上网]
 photos:
 	- /img/ssbanner.png
 ---
@@ -48,6 +49,8 @@ SSH公钥可以现在添加，也可以以后再添加。之后点创建就可�
 如果本地`~/.ssh`目录下没有`id_rsa`这样的文件，可以使用`ssh-keygen`命令在该目录下生成。这样以后每次ssh连接时就不用再输密码了。
 
 #配置ShadowSocks
+ShadowSocks是一个安全的socks5代理，它通过客户端以指定的密码、加密方式和端口连接服务器，成功连接到服务器后，客户端在用户的电脑上构建一个本地socks5代理。使用时将流量分到本地socks5代理，客户端将自动加密并转发流量到服务器，服务器以同样的加密方式将流量回传给客户端，以此实现代理上网。
+
 ##服务器端
 ###搭建服务
 SSH登录到VPS服务器后要使用pip安装ShadowSocks，所以先装`pip`。
@@ -129,7 +132,9 @@ gso="1"
 [ShadowsocksX](https://github.com/shadowsocks/shadowsocks-iOS/releases)
 
 ###Linux
-Linux的客户端安装方式同服务器端。
+Linux的客户端安装方式同服务器端，只不过启动命令变成了：
+
+	sslocal -c /etc/shadowsocks.json
 
 各种平台上的服务器配置按照之前服务器端的设置填写即可，但是server地址记得**填写IPv6的**，然后设成全局代理。
 
