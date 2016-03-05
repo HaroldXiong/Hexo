@@ -44,3 +44,5 @@ Temporary Items
 
 # .git
 /*/.deploy_git/*
+/blog/public/*
+/wiki/public/*
