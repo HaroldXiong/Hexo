@@ -7,7 +7,7 @@
         <% if(page.layout == 'page' || page.layout == 'tags') { %>
           <section id="main" style="width: 95%"><%- body %></section>
         <% } else { %>
-          <section id="main"><%- body %></section>
+          <section id="main" class='pjax'><%- body %></section>
           <% if (theme.sidebar && theme.sidebar !== 'bottom'){ %>
             <%- partial('_partial/sidebar', null, {cache: !config.relative_link}) %>
           <% } %>

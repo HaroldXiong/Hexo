@@ -1,6 +1,6 @@
 title: Digital Ocean+ShadowSocks实现校园网免流量上网
 date: 2015-11-11 23:33:33
-tags: [ShadowSocks, Digital Ocean, 科学上网]
+tags: [ShadowSocks, Digital Ocean, 科学上网, 服务器, 代理]
 categories: [网络, 科学上网]
 photos:
 	- /img/ssbanner.png
@@ -8,14 +8,14 @@ photos:
 由于校园网的资费坑得一逼，况且有流量限制，这种感觉甚是让人不爽。之前曾看到郑老湿和陈老湿在VPS搭上VPN免流量上网，后来又在开源课上受到[杜老师](http://www.pufengdu.org/)的启发，决定通过ShadowSocks代理后的IPv6教育网实现**免流量上网**。
 
 #开通VPS服务器
-目前使用体验较好的VPS服务商大概有Linode、Sakura、Digital Ocean等等，由于GitHub的[Student Developer Pack](https://education.github.com/pack)有DO家的50美刀优惠~~，虽然到现在都没申请下来~~，于是本文使用的是DO的服务。
+目前使用体验较好的VPS服务商大概有Linode、Sakura、Digital Ocean等等，由于GitHub的[Student Developer Pack](https://education.github.com/pack)有DO家的50美刀优惠~~直到三个月后才申请下来，由于注册时已经输过优惠码所以就坑了~~，于是本文使用的是DO的服务。
 
 ##注册DO帐号
 通过我的邀请 [注册地址](https://www.digitalocean.com/?refcode=bbb0bdba1c4e) 注册的新账户将获得$10的优惠。
 
 按照步骤填完个人信息后，需要绑定支付方式并往新账户里充5美元来激活DO账户。个人建议先绑定PayPal账户，至于PayPal如果没有信用卡的话，绑定储蓄卡也是可以的，个人亲测学校发的交行卡可用。
 
-激活账户后，使用优惠码`ACTIVATE10`又可以获得$10。
+激活账户后，如果你有GitHub教育优惠就使用它给的优惠码，否则可以使用优惠码`ACTIVATE10`又可以获得$10，注意这样的优惠码**只能输一次**。
 
 ![输入优惠码](/img/sspromo.png)
 
@@ -134,7 +134,11 @@ gso="1"
 ###Linux
 Linux的客户端安装方式同服务器端，只不过启动命令变成了：
 
-	sslocal -c /etc/shadowsocks.json
+	sudo sslocal -c /etc/shadowsocks.json -d start
+
+同理将`start`改成`stop`就是停止服务。
+
+也可以参考[shadowsocks-qt5](https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97)安装图形化界面版本。
 
 各种平台上的服务器配置按照之前服务器端的设置填写即可，但是server地址记得**填写IPv6的**，然后设成全局代理。
 

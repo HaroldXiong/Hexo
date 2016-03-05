@@ -1,6 +1,6 @@
 title: GoAgent科学上网攻略
 date: 2015-01-08 23:33:33
-tags: [GoAgent, 科学上网]
+tags: [GoAgent, 科学上网, 代理]
 categories: [网络, 科学上网]
 photos:
 	- /img/gabanner.png
@@ -123,7 +123,7 @@ regions =
 ##安装Chrome插件	
 GoAgent可以设置全局代理，也可以设置浏览器代理。因此下面提供的是使用Chrome浏览器插件代理的方法。
 
-从Chrome浏览器打开[Proxy SwitchyOmega](https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif?hl=cn-ZH)并添加到浏览器，在其配置界面`Import/Export`里把`/local/SwitchyOptions.bak`导入进去：
+从Chrome浏览器打开[Proxy SwitchyOmega](https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif?hl=cn-ZH)并添加到浏览器。如果被墙了就到[GitHub](https://github.com/FelisCatus/SwitchyOmega/releases)下载crx文件安装。在其配置界面`Import/Export`里把`/local/SwitchyOptions.bak`导入进去：
 
 ![导入配置](/img/gaimport.png)
 

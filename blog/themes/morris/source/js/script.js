@@ -134,6 +134,11 @@
 
     $container.removeClass('mobile-nav-on');
   });
+
+  if ($.support.pjax) {
+    $(document).pjax('a', '#main', { fragment: ('#main'), timeout: 10000 });
+  }
+  
   $(".toggle-input a").on('click', function() {
     var content = $(this).parent().prev(".toggle-content");
     if (!content.css("max-height") || content.css("max-height") == "250px") {

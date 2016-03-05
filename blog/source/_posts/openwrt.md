@@ -1,12 +1,12 @@
 title: OpenWrt+ShadowSocks实现路由器自动代理
 date: 2015-12-12 12:12:12
-tags: [ShadowSocks, OpenWrt, 科学上网]
+tags: [ShadowSocks, OpenWrt, 科学上网, 路由器]
 categories: [网络, 科学上网]
 photos:
 	- /img/opbanner.png
 ---
 
-暑假剁手了一台RMBP但没有以太网接口，为了省钱就需要一个无线路由器，之前曾了解到路由器可以刷**OpenWrt**后装上**ShadowSocks**实现自动科学上网，于是就在集训的时候从马云家买了一个二手的[TP-Link TL-WR703N](http://www.tp-link.com.cn/product_225.html)刷上OpenWrt在机房给笔记本供网。
+暑假剁手了一台rMBP但没有以太网接口，为了省钱就需要一个无线路由器，之前曾了解到路由器可以刷**OpenWrt**后装上**ShadowSocks**实现自动科学上网，于是就在集训的时候从马云家买了一个二手的[TP-Link TL-WR703N](http://www.tp-link.com.cn/product_225.html)刷上OpenWrt在机房给笔记本供网。
 
 ![TL-WR703N](/img/op703n.png)
 
@@ -116,11 +116,17 @@ OpenWrt归根结底还是一个**Linux发行版**，所以Linux命令在这里�
 
 由于我使用的路由器是`ar71xx`架构（其实市面上大多路由器都是这个架构），因此下面的软件包也只适用这个架构，若架构不同请根据个人情况自行寻找软件包。
 
-##ShadowSocks
-在OpenWrt上我们可以安装`shdowsocks-libev`版本，顺便搭配LuCI界面的`luci-app`使用，这个项目在[sourceforge](http://sourceforge.net/projects/openwrt-dist/files/)有发布，安装包我们从这里获取：
+先更新一下软件源：
 
-	wget http://sourceforge.net/projects/openwrt-dist/files/shadowsocks-libev/2.4.1-6f44d53/ar71xx/shadowsocks-libev-spec_2.4.1-1_ar71xx.ipk
-	wget http://sourceforge.net/projects/openwrt-dist/files/luci-app/shadowsocks-spec/luci-app-shadowsocks-spec_1.3.2-1_all.ipk
+	opkg update
+	opkg list-installed
+	opkg list
+
+##ShadowSocks
+在OpenWrt上我们可以安装`shdowsocks-libev`版本，顺便搭配LuCI界面的`luci-app`使用，这个项目在[sourceforge](http://sourceforge.net/projects/openwrt-dist/files/)有发布，可以从这里下载最新的。如果被墙了也可以从我的服务器上下载备用的较老版本：
+
+	wget https://www.shintaku.cc/files/shadowsocks-libev-spec_2.4.1-1_ar71xx.ipk
+	wget https://www.shintaku.cc/files/luci-app-shadowsocks-spec_1.3.2-1_all.ipk
 	
 下载完成后使用`opkg`命令安装：
 
@@ -136,10 +142,10 @@ OpenWrt归根结底还是一个**Linux发行版**，所以Linux命令在这里�
 ##6relayd
 由于现在即使通过代理上网也是消耗校内流量的，为了不走流量，我们只能借助IPv6网络。但是普通的路由器很少可以正常获取IPv6地址，即使路由器能获取到连接设备也很难获取，除了NETGEAR的部分路由器（包括WNR2200）的新版固件是有IPv6连接的，并且本人亲测使用`穿透模式`可以正常使用IPv6网络。所以我希望在OpenWrt上也能使用`穿透模式`，再通过ShadowSocks代理IPv6网络就可以免流量访问外网了。
 
-要使用`穿透模式`就少不了[6relayd](https://wiki.openwrt.org/doc/uci/6relayd)这个软件。可是官方源并没提供这个包，于是还需要从网络获取并安装：
+要使用`穿透模式`就少不了[6relayd](https://wiki.openwrt.org/doc/uci/6relayd)这个软件。可是官方源如今没提供这个包，于是可以获取我的备份并安装：
 
-	wget http://193.87.95.148/openwrt/ar71/trunk/bin/ar71xx/packages/6relayd_2013-10-21.1-ad00c3dd9ee42f172870708724858ab502b3a689_ar71xx.ipk
-	opkg install 6relayd_2013-10-21.1-ad00c3dd9ee42f172870708724858ab502b3a689_ar71xx.ipk
+	wget https://www.shintaku.cc/files/6relayd_2013-10-21_ar71xx.ipk
+	opkg install 6relayd_2013-10-21_ar71xx.ipk
 	
 安装完成之后编辑`/etc/config/6relayd`文件在默认配置后面加一组：
 
@@ -173,6 +179,6 @@ config relay
 
 ![ShadowSocks设置](/img/opsss.png)
 
-记得要开全局代理，因为毕竟PPPoE拨着号呢，在校园网11月30日改革后有线网拨号后不用登录就能上网让我很慌啊，路由器一直连着网终归是有偷跑流量的风险，所以打开IPv6全局代理最为保险，使得能通过代理的IPv6网络可以使用而IPv4网络因为通不过代理无法使用。
+记得要开全局代理，因为毕竟PPPoE拨着号呢，~~在校园网11月30日改革后有线网拨号后不用登录就能上网让我很慌啊，路由器一直连着网终归是有偷跑流量的风险，所以打开IPv6全局代理最为保险，使得能通过代理的IPv6网络可以使用而IPv4网络因为通不过代理无法使用。~~2016年春季学期开学后发现即使拨号路由器也无法获取IPv6地址了。
 
 于是现在得到的效果就是任何连接到这台路由器的设备无需任何登录即可**访问外网**，而且**不消耗校内网流量**，网络还**自带科学上网Buff**，从此妈妈再也不用担心我流量不够用了。
