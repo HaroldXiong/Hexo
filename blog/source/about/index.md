@@ -8,11 +8,13 @@ date: 2016/03/03
 
 天津大学 计算机科学与技术 2013级本科
 
+电子邮箱：[liangzhenduo0608@hotmail.com](mailto:liangzhenduo0608@hotmail.com)
+
 个人主页：[https://www.shintaku.cc/](https://www.shintaku.cc/)
 
 GitHub：[https://github.com/liangzhenduo0608](https://github.com/liangzhenduo0608)
 
-电子邮箱：[liangzhenduo0608@hotmail.com](mailto:liangzhenduo0608@hotmail.com)
+
 
 
 
