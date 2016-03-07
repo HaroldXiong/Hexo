@@ -1,181 +1,62 @@
 title: 个人简历
-date: 2016/03/03
+toc: false
 ---
 
 #基本信息
 
-梁振铎
+**天津大学 计算机科学与技术专业** ***2017届本科生***
 
-天津大学 计算机科学与技术 2013级本科
++ 电子邮箱：[liangzhenduo0608@hotmail.com](mailto:liangzhenduo0608@hotmail.com)
++ 个人主页：[https://www.shintaku.cc/](https://www.shintaku.cc/)
++ GitHub：[https://github.com/liangzhenduo0608](https://github.com/liangzhenduo0608)
 
-电子邮箱：[liangzhenduo0608@hotmail.com](mailto:liangzhenduo0608@hotmail.com)
+#个人能力
 
-个人主页：[https://www.shintaku.cc/](https://www.shintaku.cc/)
++ 熟练使用**Linux / OS X**平台进行开发
++ 熟悉**C++ / Java**等高级语言
++ 有一定的**Web**开发经验
++ 熟悉**MySQL**数据库
++ 对**Shell**和**Python**有一定的了解
++ 在**机器学习**方面做过少量的工作
 
-GitHub：[https://github.com/liangzhenduo0608](https://github.com/liangzhenduo0608)
+#项目经历
 
+###天津市某研究院 信息管理系统
 
++ Feb 2016 - Mar 2016
++ PHP Web Application
++ 基于LNMP的问卷调查统计系统，包括数据录入、数据管理、信息检索等功能。
 
+###图书管理系统
 
++ Oct 2015 - Nov 2015
++ C++ Qt Application
++ 使用Qt开发的跨平台图书管理系统，能实现基本的图书借还管理功能。
 
-## 語錄 ##
+###网上购物商城
 
-* PChome 長篇  
-> 我在摸索我存在的意義、生命的意義、內涵及價值。 沒有真正神手般的厲害，套用模式是大部分的情況。 沒那麼厲害的我存在的意義為何，襯托出神的存在？ 有時候不能怪別人不給我機會，我已經開始省思， 為什麼我沒有給別人機會的原因，而是全要靠別人。 有時候我認為我與眾不同，那是因為我做不到很多人能辦到的事情。 我聽不到、玩不起來、說得不夠明瞭、理解得不夠多， 我缺少的語文能力，就是一切一切無能的判定。 為此，我不曉得能做些對別人有幫助的事情。 我知道我自己是個不服輸的性格，但現在我不得不認輸。 我沒有能力，因此我必須認輸。 我到底來這世界作什麼？處處充滿不確定性， 而我總是無法出類拔萃，想當個一般人似乎也回不了頭了。 越強大的挑戰需要越強力的支持，而我的支持是什麼？ 最近嘗試與人談話，但都是失敗的結局，沒人能接受， 不需要言語，不需要溝通，一切所想都表達不出來。
++ Mar 2015 - Jun 2015
++ PHP Web Application
++ 基于LAMP的简单网上购物平台，包括用户注册登录、商品选购、购物车等基本功能。
 
-* 才能絕望篇  
-> 別成為跟我一樣的人，如此悲慘又無助。同時給予希望與絕望的人生。
+###文本编辑器
 
-* 足下篇  
-> 專注于足下，才能走得更遠
++ Dec 2014 - Jan 2015
++ Java Application
++ 使用Java开发的简易文本编辑器，功能参考Windows的记事本，外加一些代码编辑器的特性，如关键字高亮、等宽字体等。
 
-## 目標 ##
+###画图工具
 
-* 找到除了學習、工作和成就以外，重視的人事物。
-* 逃脫畢業英文門檻，從大學畢業。(現在情況相當危急， __延畢概率 UP__)
-* 給我信心，一點優越感都沒有，再這樣下去真的撐不住。
++ Nov 2014 - Dec 2014
++ Java Applet
++ 使用Java开发的简易画图工具，可以通过拖拽绘制简单的几何图形。
 
-## 自傳 ##
+#获奖经历
 
-當前為大學版本
-
-### 家庭背景 ###
-
-學生楊翔雲，花蓮人，父親投入綜理校務的教育事務，母親從事署立花蓮醫院護理工作，由於母親經常輪值大小夜班，從小到大幾乎都是陪著父親從偏遠的豐濱鄉港口國小到花東縱谷的壽豐鄉平和國小，以及花蓮市的中正國小、花崗國中、花蓮高中，上山下海接觸各種的文化與族群，尤其各個慶典文化的活動我都陪父親參與，同時也碰見了許多地方上的大人物，被這些長輩鼓勵與期待，希望將來能認真學習為社會做不平凡的事。
-
-### 求學過程 ###
-
-小學因為父親工作的關係，小學讀過海邊、鄉村及都市的學校。接觸到各種族群與文化，有著許多人生的體驗。到了國中，遇到了許多背景不同的朋友，深刻了解學習上需要勇於接受良性的競爭。有了深刻的覺悟後開始認真讀書，參與數學比賽與珠心算能力檢定，來奠定自己在數學領域上的基礎，這些都成為後來在學習資訊領域的助力。
-
-進入花蓮高中，在這三年中，正是學習資訊領域與程式設計的開始，與一群實力相當的同學們一起奮鬥，讓視野更加地寬闊。由於在數理資優班，在專題報告（資訊）試做中，獲得台下同學的喝彩，讓我深深地感受到自己在資訊領域的能力認可，便毅然決然選擇了數學組與資訊組為生涯發展的首選。
-
-高中學習用 ANSI C 寫 Zerojudge、UVa Online Judge 上的題目，在屢次參與台大舉辦的 NPSC 和東區資訊科能力競賽後，終於在最後兩年分別得到了資訊科能力競賽的佳作、第二名，最後一年代表東區參與全國資訊科能力競賽，靠著自學和資訊老師的提點下，雖不敵有長期累積和培訓的其他選手，但是在期間讓我磨練能力，學了更多的演算法，修正取多原本的錯誤知識，更加修改對比賽的態度。
-
-高中數學方面，曾與同學一起製作數學科展，主題是關於圖論，在高二的時候獲得學校代表權。藉由在資訊領域上學到的演算法，做出程式碼去搜尋資料，這使得我們可以減少相當大的人力以及人力處理上的誤差，同時使我們在東區分賽脫穎而出，而後來在全國科學展覽會上獲得數學組第三名。在製作程式時，不斷地修正效率以及準確度，以代替人力上的不足。
-
-在大學時期，一年級就讀中興大學資訊工程學系，在二年級時轉入中央大學資訊工程學系，三年中參與兩次 ACM-ICPC、NCPC，數次各大學舉辦的資訊競賽、PTC、ITSA 月賽/桂冠賽，並且在 UVa Online Judge 磨練數千題。
-
-在大學一年的專題中，特別撇開一如往常的演算法領域的程式設計，向專題指導教授學習軟體工程領域，在 C/C++、JAVA Application 外，一年中學習了網頁程式設計 javascript、Nodejs，以及最重要的版本控制系統 Github。在不熟悉的領域中，學習新的項目開發是我這一年最大的挑戰，經歷的經驗讓我收穫非常多。
-
-## 得獎清單 ##
-
-| 獎項類別  |	競賽名稱 | 獲得獎項/競賽成果|
-|-----------|------------|------------------|
-| 國際獎項	| The 2011 ACM-ICPC Asia Hsinchu Regional Contest | Fourteen Place |
-| | The 2012 ACM-ICPC Asia Hsinchu Regional Contest | Honorable Mention |
-| 全國獎項(含分區)	| 第50屆中小學科學展覽會 | 高中組數學科第三名
-| |第十一屆台灣區TRML高中數學競賽 | 表現良好 |
-| |第十二屆台灣區TRML高中數學競賽 |	表現良好 |
-| |第十二屆台灣區TRML高中數學競賽 | 台北區團隊優良獎 |
-| |第十二屆台灣區TRML高中數學競賽 |	個人成績優異 |
-| |98學年度高級中學數理及資訊學科能力競賽第一區複賽	資訊科 | 佳作 |
-| |99學年度高級中學數理及資訊學科能力競賽第一區複賽	資訊科 | 第二名 |
-| |99學年度全國高級中學資訊學科能力競賽	| 進入決賽 |
-| |2012 中區大專院校程式設計競賽 | 佳作 |
-| |2013 中區大專院校程式設計競賽 |第一名|
-| |2014 中區大專院校程式設計競賽 |第二名|
-| |2013 靜宜大學全國程式設計競賽 | 特優 |
-| |2011年ITSA線上程式設計大賽 | 績優團隊 4 次 |
-| |2012年ITSA線上程式設計大賽 | 績優團隊 2 次(至3月記錄) |
-| |PTC 國際大專院校程式設計競賽 | 排名第二名(2012/02/25)|
-| |100年度全國大專電腦軟體設計競賽 | 甲組 佳作 |
-| |101年度全國大專電腦軟體設計競賽 | 甲組 第二名 |
-| |101年度 03/08 全國大專 ITSA 盃程式設計桂冠挑戰賽 | 菁英組第二名 |
-| |101年度 06/25 全國大專 ITSA 盃程式設計桂冠挑戰賽 | 挑戰組第三名 |
-| 校內獎項 | 97學年度校內科學展覽	數學科 | 佳作 |
-| |98學年度校內科學展覽	數學科 |優勝|
-| |98學年度數理及資訊學科能力競賽初賽	資訊科 | 第二名 |
-| |99學年度數理及資訊學科能力競賽初賽	資訊科 | 第一名 |
-| |特別獎-藝文競賽(高中)	|熱心參與藝文競賽|
-| |100學年第1學期理學院資訊科學與工程學系成績優異	|成績優異|
-| |100學年第1學期必修課程-計算機程式設計	|表現優異|
-| |100學年第1學期必修課程-離散數學	|表現優異|
-| |100學年第1學期必修課程-計算機導論 	|表現優異|
-| |101學年第1學期資電學院資訊工程學系 |成績優異|
-| |101學年第2學期資電學院資訊工程學系 |成績優異|
-| |102學年第1學期資電學院資訊工程學系 |成績優異|
-| |102學年第2學校「當代消費文化與社會」 |用心學習|
-|其他|	大學程式能力檢定 (2011年12月20日)	|A(解題數 5 題)|
-| |大學程式能力檢定 (2011年09月27日)	|A+(解題數 6 題)|
-| |大學程式能力檢定 (2011年03月27日)	|A+(解題數 7 題)|
-| |高中生程式解題系統-ZeroJudge	|解題總計 1200+ 題|
-| |UVa Online Judge 	|解題總計 2400+ 題|
-
-# 作品 #
-
-[展示櫃 Demo](http://morris821028.github.io/works/)
-
-# 圖表 #
-
-{% raw %}
-<script type="text/javascript">
-	$(function(){
-		var data = [
-		  {"period": "100-09", "Average": 92.0},
-		  {"period": "101-02", "Average": 92.1},
-		  {"period": "101-09", "Average": 92.35},
-		  {"period": "102-02", "Average": 95.67},
-		  {"period": "102-09", "Average": 96.47},
-		  {"period": "103-02", "Average": 93.52}
-		];
- 
-		// 產生圖表, 資料來源為 data
-		// x 軸為 period, y 軸為 ['licensed', 'sorned']
-		Morris.Line({
-		  element: 'morris-chart1',
-		  data: data, 
-		  xkey: 'period',
-		  ykeys: ['Average'],
-		  labels: ['學期平均']
-		});
-
-		var data2 = [
-		  {"period": "100-09", "rank": 1.0, "percent": 3.4, "ap" : 3.4},
-		  {"period": "101-02", "rank": 1.0, "percent": 3.4, "ap" : 3.4},
-		  {"period": "101-09", "rank": 1.0, "percent": 2.13, "ap" : 0.92},
-		  {"period": "102-02", "rank": 1.0, "percent": 2.13, "ap" : 0.92},
-		  {"period": "102-09", "rank": 1.0, "percent": 2.13, "ap" : 0.92},
-		  {"period": "103-02", "rank": 1.0, "percent": 2.13, "ap" : 0.92}
-		];
-
-		Morris.Line({
-		  element: 'morris-chart2',
-		  data: data2, 
-		  xkey: 'period',
-		  ykeys: ['rank', "percent", "ap"],
-		  labels: ['班級排名', "班級名次百分比", "系名次百分比"]
-		});
-
-		Morris.Donut({
-		    element: 'morris-chart3',
-		    data: [
-			    {value: 90, label: 'C/C++'},
-			    {value: 5, label: 'Java'},
-			    {value: 1, label: 'HTML/CSS/Js'},
-			    {value: 4, label: 'Unknown'}
-		    ],
-		    formatter: function (x) { return x + "%"}
-		}).on('click', function(i, row) {
-		});
-		Morris.Donut({
-		    element: 'morris-chart4',
-		    data: [
-			    {value: 50, label: 'M'},
-			    {value: 5, label: 'S'},
-			    {value: 5, label: 'Sick'},
-			    {value: 10, label: 'Crazy'},
-			    {value: 10, label: "Stubborn"},
-			    {value: 20, label: 'Introvert'}
-		    ],
-		    formatter: function (x) { return x + "%"}
-		}).on('click', function(i, row) {
-		});
-	});
-</script>
-<div>
-<div class="chart"><div id="morris-chart1" style="height: 250px;"></div></div>
-<div class="chart"><div id="morris-chart2" style="height: 250px;"></div></div>
-<div class="chart"><div id="morris-chart3" style="height: 250px;"></div></div>
-<div class="chart"><div id="morris-chart4" style="height: 250px;"></div></div>
-</div>
-{% endraw %}
+|<div style="text-align:center">时间</div>|<div style="text-align:center">竞赛名称</div>|<div style="text-align:center">奖项</div>|
+|-|-|-|
+|<div style="text-align:center">Nov 2015|<div style="text-align:center">2015 ACM-ICPC Asia Regional Contest @Shanghai |<div style="text-align:center">**Honorable Mention** |
+|<div style="text-align:center">Sep 2015|<div style="text-align:center">全国大学生数学建模竞赛天津赛区                     |<div style="text-align:center">**一等奖**             |
+|<div style="text-align:center">Jun 2015|<div style="text-align:center">“美团杯”天津大学程序设计挑战赛                     |<div style="text-align:center">**三等奖**             |
+|<div style="text-align:center">Nov 2014|<div style="text-align:center">IBM Master the Mainframe Contest 2014         |<div style="text-align:center">**三等奖**             |
+|<div style="text-align:center">Jun 2014|<div style="text-align:center">“微乐校园开发者杯”天津大学程序设计挑战赛             |<div style="text-align:center">**优秀奖**             |
