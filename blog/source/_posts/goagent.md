@@ -123,7 +123,7 @@ regions =
 ##安装Chrome插件	
 GoAgent可以设置全局代理，也可以设置浏览器代理。因此下面提供的是使用Chrome浏览器插件代理的方法。
 
-从Chrome浏览器打开[Proxy SwitchyOmega](https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif?hl=cn-ZH)并添加到浏览器。如果被墙了就到[GitHub](https://github.com/FelisCatus/SwitchyOmega/releases)下载crx文件安装。在其配置界面`Import/Export`里把`/local/SwitchyOptions.bak`导入进去：
+从Chrome浏览器打开[Proxy SwitchyOmega](https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif?hl=cn-ZH)并添加到浏览器。如果被墙了就到[GitHub](https://github.com/FelisCatus/SwitchyOmega/releases)下载`crx`文件手动添加。在其配置界面`Import/Export`里把`/local/SwitchyOptions.bak`导入进去：
 
 ![导入配置](/img/gaimport.png)
 
@@ -140,6 +140,6 @@ GoAgent可以设置全局代理，也可以设置浏览器代理。因此下面�
 
 ![导入证书](/img/gacert.png)
  
-至此，以后每次需要代理的时候只要运行goagent.exe或proxy.py就行了，此时你就可以通过Google公司加州山景城的服务器畅游墙外的世界了。
+至此，以后每次需要代理的时候只要运行`goagent.exe`或`proxy.py`就行了，此时你就可以通过Google公司加州山景城的服务器畅游墙外的世界了。
 
 > 这个大家啊，如果，对翻墙有什么想法，有什么看法，尽可以提。我觉得，我相信，广大记者朋友，是客观的。这个也欢迎大家，有机会，到墙外去，墙外人非常热心，而且这些年的这个发展，这个大家团结一致、同心同德，已经取得了很大的进步。我相信，我们这些这个记者朋友们，你们对今天翻墙，放出干货的报道，会是客观的，准确的。好，谢谢大家。
