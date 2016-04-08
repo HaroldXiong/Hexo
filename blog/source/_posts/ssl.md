@@ -79,7 +79,7 @@ server {
 ##强制跳转
 经过之前的配置必须在地址里写上`https`才会跳转到HTTPS域名，不然还是会跳转到HTTP的。
 
-所以还要编辑`/etc/nginx/conf.d`下的`ssl.conf`文件：
+所以还要编辑`/etc/nginx/conf.d`下的`default.conf`文件：
 
 ```bash
 server {

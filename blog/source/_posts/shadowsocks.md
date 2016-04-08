@@ -15,11 +15,11 @@ photos:
 
 按照步骤填完个人信息后，需要绑定支付方式并往新账户里充5美元来激活DO账户。个人建议先绑定PayPal账户，至于PayPal如果没有信用卡的话，绑定储蓄卡也是可以的，个人亲测学校发的交行卡可用。
 
-激活账户后，如果你有GitHub教育优惠就使用它给的优惠码，否则可以使用优惠码`ACTIVATE10`又可以获得$10，注意这样的优惠码**只能输一次**。
+激活账户后，如果你有GitHub教育优惠就使用它给的优惠码，如果没有可以搜一个最近的10美元或20美元优惠码，注意这样的优惠码**只能输一次**。
 
 ![输入优惠码](/img/sspromo.png)
 
-不出意外，现在账户里应该有25美元了，这足够使用最便宜的套餐五个月了。
+账户余额基本就有15美元了，这足够使用最便宜的套餐3个月了。
 
 ##新建服务器
 首先要给服务器取一个Hostname，按个人喜好随意命名。
@@ -87,7 +87,9 @@ SSH登录到VPS服务器后要使用pip安装ShadowSocks，所以先装`pip`。
 	ssserver -c /etc/shadowsocks.json --fast-open -d start
 	ssserver -d stop
 	
-如果觉得以上命令太长难于记忆，可以在`~/.bashrc`里加入alias：
+如果发现开启服务后连接不上，可以**停用防火墙**试一下。
+	
+要是觉得以上命令太长难于记忆，可以在`~/.bashrc`里加入alias：
 
 ```bash
 alias ssstart='ssserver -c /etc/shadowsocks.json --fast-open -d start'

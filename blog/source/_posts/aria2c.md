@@ -13,18 +13,18 @@ photos:
 以Mac版为例，首先到[GitHub](https://github.com/tatsuhiro-t/aria2/releases)上下载最新版本的`dmg`文件（其他平台下载对应的安装文件）并安装。程序将会安装到`/usr/local/aria2`下。
 
 #配置文件
-先给配置文件在主文件夹里建一个目录：
+先新建一个配置文件叫`aria2.conf`：
 
 	mkdir ~/.aria2
-	cd ~/.aria2
+	vi ~/.aria2/aria2.conf
 	
-然后在目录里新建一个配置文件叫`aria2.conf`并编辑之：
+然后编辑它：
 
 ```bash
 # Basic Options
 dir=/Users/$USER/Downloads
-input-file=/Applications/aria2c/session.dat
-log=/Applications/aria2c/aria2.log
+input-file=/Users/$USER/.aria2/session.dat
+log=/Users/$USER/.aria2/aria2.log
 max-concurrent-downloads=15
 max-connection-per-server=15
 check-integrity=true
@@ -58,7 +58,7 @@ force-save=true
 file-allocation=none
 log-level=warn
 max-overall-download-limit=0K
-save-session=/Applications/aria2c/session.dat
+save-session=/Users/$USER/.aria2/session.dat
 always-resume=true
 split=10
 min-split-size=10M
@@ -67,16 +67,20 @@ min-split-size=10M
 user-agent=netdisk;5.2.6;PC;PC-Windows;6.2.9200;WindowsBaiduYunGuanJia
 referer=http://pan.baidu.com/disk/home
 ```
-其中`dir`参数设置的是下载路径，可以按自己的习惯更改。
+配置文件中所有`$USER`要改成自己的用户名，`dir`参数设置的是下载路径，也可以按自己的习惯更改。
 
-这时可以通过`aria2c`命令启动服务了。可以通过`ps aux | grep aria2c`命令检查是否启动成功。
+`input-file`、`save-session`参数是指定session（保存下载进度）的存储位置，如果没有那个文件可以手动创建：
+
+	touch session.dat
+
+`log`参数指定log路径，会自动生成。这时可以通过`aria2c`命令启动服务了。可以通过`ps aux | grep aria2c`命令检查是否启动成功。
 
 #配置GUI
 由于aria2是一个命令行工具，所以在没有其他辅助的情况下需要通过命令行来操作。具体使用方法请参阅[aria2.github.io](https://aria2.github.io/)。
 
 为了更加便于使用，GitHub上的[ziahamza](https://github.com/ziahamza)开发了一个WebUI，可以通过网页界面来操作aria2：
 
-![WebUI](/img/arwebui.png)	
+![WebUI](/img/arui.png)	
 
 简单来说就是打开[http://ziahamza.github.io/webui-aria2/](http://ziahamza.github.io/webui-aria2/)就能使用了。也可以将[项目源码](https://github.com/ziahamza/webui-aria2/archive/master.zip)下载下来放到本地或者放到自己的服务器上来用，比如[http://aria.shintaku.cc/](http://aria.shintaku.cc/)。
 
