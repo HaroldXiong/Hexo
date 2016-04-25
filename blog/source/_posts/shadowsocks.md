@@ -1,6 +1,6 @@
 title: Digital Ocean+ShadowSocks实现校园网免流量上网
 date: 2015-11-11 23:33:33
-tags: [ShadowSocks, Digital Ocean, 科学上网, 服务器, 代理]
+tags: [ShadowSocks, VPS, 科学上网, 服务器, 代理, Linux]
 categories: [网络, 科学上网]
 photos:
 	- /img/ssbanner.png

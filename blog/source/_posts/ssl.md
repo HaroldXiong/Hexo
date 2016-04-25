@@ -1,6 +1,6 @@
 title: SSL证书的申请与配置
 date: 2015-12-30 23:33:33
-tags: [服务器, 网站]
+tags: [服务器, 网站, VPS]
 categories: [网络, 网站部署]
 photos:
 	- /img/sslbanner.png

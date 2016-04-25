@@ -1,6 +1,6 @@
 title: SoftEther VPN的搭建与连接
 date: 2016-01-24 23:33:33
-tags: [SoftEther, VPN, 科学上网, 服务器, 代理]
+tags: [SoftEther, VPN, 科学上网, 服务器, 代理, Linux, VPS]
 categories: [网络, 科学上网]
 photos:
 	- /img/vpnbanner.png

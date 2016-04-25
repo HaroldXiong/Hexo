@@ -1,6 +1,6 @@
 title: OpenWrt+ShadowSocks实现路由器自动代理
 date: 2015-12-12 12:12:12
-tags: [ShadowSocks, OpenWrt, 科学上网, 路由器]
+tags: [ShadowSocks, OpenWrt, 科学上网, 路由器, Linux]
 categories: [网络, 科学上网]
 photos:
 	- /img/opbanner.png
