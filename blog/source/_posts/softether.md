@@ -121,7 +121,7 @@ photos:
 
 ![New Connection Setting](/img/vpnset.png)
 
-`Host Name`填服务器的地址或域名，端口如果之前改过了在这也记得改过来，右下角的密码填之前设置过的密码。新建完成后`Connect`就会弹出`Easy Setup`窗口：
+`Host Name`填服务器的地址或域名，端口如果之前改过了在这也记得改过来，右下角的密码填之前设置过的密码。新建完成后`Connect`就会弹出`Easy Setup`窗口（如果提示连不上请检查一下服务器的防火墙设置）：
 
 ![Easy Setup](/img/vpneasy.png)
 
@@ -157,10 +157,21 @@ photos:
 
 ![SecureNAT Configration](/img/vpnnat.png)
 
-注意DNS要改为`8.8.8.8`和`8.8.4.4`。这里就算配置完毕。
+注意DNS要改为`8.8.8.8`和`8.8.4.4`。这里就算配置完毕。然后顺便生成一下**OpenVPN**的配置文件，点`OpenVPN / MS-SSTP Setting`：
+
+![Server Manager](/img/vpnopen.png)
+
+然后点击新窗口中部的按钮生成配置文件：
+
+![OpenVPN / MS-SSTP Setting](/img/vpnovpn.png)
+
+打开导出的压缩包会看到里面有两个`.ovpn`文件，一般我们要用到`*_openvpn_remote_access_l3.ovpn`这个文件，因为我们是通过IPv4地址管理的VPN，所以这个配置文件里的`remote`一项会是IPv4地址，如果需要使用IPv6的VPN就将其替换为相应的IPv6地址即可。
 
 #本地连接
-##Windows
+##IPv4
+这里只说电脑设备，移动的设备的话配置方法类似。
+
+###Windows
 首先到`网络和共享中心`里新建一个网络连接：
 
 ![Set Up a Connection or Network](/img/vpnwin1.png)
@@ -191,7 +202,7 @@ photos:
 
 之后在VPN连接里把用户名和密码填进去就可以连上了。
 
-##Mac OS X
+###Mac OS X
 在网络配置里新建网络连接：
 
 ![Network Preferences](/img/vpnmac1.png)
@@ -205,3 +216,25 @@ photos:
 ![Network Preferences](/img/vpnmac3.png)
 
 密码中填上面用户的密码，共享密钥填之前设置的预共享密钥，保存并连接即可。
+
+##IPv6
+因为有使用教育网通过IPv6的需求，这里也说一下IPv6的连接方法。
+
+###移动设备
+iOS的应用商店里有OpenVPN的客户端，但由于软件的特殊性，中国应用商店里已经下架了，所以通过什么渠道安装请自己想办法。
+
+如果你的Android设备支持IPv6网络的话，Play Store里也有OpenVPN的客户端下载，也可以搜一个apk自己装。
+
+![OpenVPN](/img/vpnopenvpn.png)
+
+上述设备安装好客户端以后，将之前生成的`.ovpn`文件传到设备中，用OpenVPN打开即可，之后还会需要输入之前设置的用户名密码之类的，这里不再赘述。
+
+###Mac OS X
+因为没有找到Mac上的OpenVPN客户端，所以使用了一个叫做**Tunnelblick**的App，功能类似。
+
+![Tunnelblick](/img/vpntunnel.png)
+
+到[https://tunnelblick.net/](https://tunnelblick.net/downloads.html)下载后，同样将`.ovpn`文件用它打开就可以了，输入用户名密码后就连上了。
+
+###Windows
+从理论上讲IPv6的VPN用Windows自带的VPN连接就可以（同IPv4），把地址变一下就可以了。如果遇到不能连接的情况也可以试一下OpenVPN的Windows版，去[https://openvpn.net/](https://openvpn.net/index.php/open-source/downloads.html)下载即可。
