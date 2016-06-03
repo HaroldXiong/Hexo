@@ -1,4 +1,4 @@
-title: OpenWrt+ShadowSocks实现路由器自动代理
+title: OpenWrt路由器的网络代理
 date: 2015-12-12 12:12:12
 tags: [ShadowSocks, OpenWrt, 科学上网, 路由器, Linux]
 categories: [网络, 科学上网]
@@ -43,7 +43,7 @@ photos:
 
 + 关闭路由器电源，用笔尖捅住“Restore Factory Settings”~~菊花~~键不放。
 
-+ 打开路由器电源，这时电源灯开始闪烁，这时依然**不要松开**RESET键，直到电源灯变为绿色长亮才可松手（可能有的路由器的表现不一样，达到类似效果即可），这时路由器已经进入了tftp模式。
++ 打开路由器电源，这时电源黄灯开始闪烁，这时依然**不要松开**RESET键，直到电源灯变为绿色长亮（或闪烁？）才可松手（可能有的路由器的表现不一样，达到类似效果即可），这时路由器已经进入了tftp模式。
 
 + 将电脑的IP设为`192.168.1.2`，子网掩码设为`255.255.255.0`，将电脑与路由器的**1号LAN口**用网线相连。
 
@@ -123,17 +123,17 @@ OpenWrt归根结底还是一个**Linux发行版**，所以Linux命令在这里�
 	opkg list
 
 ##ShadowSocks
-在OpenWrt上我们可以安装`shdowsocks-libev`版本，顺便搭配LuCI界面的`luci-app`使用，这个项目在[sourceforge](http://sourceforge.net/projects/openwrt-dist/files/)有发布，可以从这里下载最新的。如果被墙了也可以从我的服务器上下载备用的较老版本：
+在OpenWrt上我们可以安装`shdowsocks-libev`版本，顺便搭配LuCI界面的`luci-app`使用，这个项目在[sourceforge](https://sourceforge.net/projects/openwrt-dist/files/shadowsocks-libev/)有发布，可以从这里下载最新的。如果被墙了也可以从我备份在服务器上的较老版本（注意软件所适配的架构）：
 
-	wget https://www.shintaku.cc/files/shadowsocks-libev-spec_2.4.1-1_ar71xx.ipk
-	wget https://www.shintaku.cc/files/luci-app-shadowsocks-spec_1.3.2-1_all.ipk
+	wget https://www.shintaku.cc/files/shadowsocks-libev-spec_2.4.6-1_ar71xx.ipk
+	wget https://www.shintaku.cc/files/luci-app-shadowsocks-spec_1.4.0-1_all.ipk
 	
 下载完成后使用`opkg`命令安装：
 
-	opkg install shadowsocks-libev-spec_2.4.1-1_ar71xx.ipk
-	opkg install luci-app-shadowsocks-spec_1.3.2-1_all.ipk
+	opkg install shadowsocks-libev-spec_2.4.6-1_ar71xx.ipk
+	opkg install luci-app-shadowsocks-spec_1.4.0-1_all.ipk
 	
-安装完成后`reboot`命令重启路由器，再次进入LiCI界面可以看到多了一个`Services`-`ShadowSocks`：
+安装完成后`reboot`命令重启路由器，再次进入LuCI界面可以看到多了一个`Services`-`ShadowSocks`：
 	
 ![ShadowSocks](/img/opss.png)
 

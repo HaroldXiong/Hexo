@@ -80,6 +80,6 @@ motd=A Minecraft Server             #服务器在服务器列表页所显示的�
 
 	screen -S mc
 	
-这时相当于进入一个新终端，`mc`是这个screen的名字。在里面继续执行之前的java启动命令就可以正常启动游戏了。在screen中只要按下`Ctrl+A`在按下`Ctrl+D`就可以回到原来的终端了。再想进入这个screen的话运行`screen -r mc`就可以了。想要停止游戏的话输入`stop`就可以了。
+这时相当于进入一个新终端，`mc`是这个screen的名字。在里面继续执行之前的java启动命令就可以正常启动游戏了。在screen中只要按下`Ctrl+A`再按下`Ctrl+D`就可以回到原来的终端了。再想进入这个screen的话运行`screen -r mc`就可以了。想要停止游戏的话输入`stop`就可以了。
 
 然后在本地启动游戏，选多人游戏并输入服务器地址就能连接了。
