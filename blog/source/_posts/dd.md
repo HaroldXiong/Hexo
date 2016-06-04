@@ -1,7 +1,7 @@
 title: Mac上通过dd命令制作启动盘
 date: 2015-12-21 21:11:11
-tags: [Mac OS X, Unix]
-categories: [＊nix, 命令]
+tags: [Mac OS X, Unix, Linux]
+categories: [奇技淫巧, ＊nix]
 photos: 
 	- /img/ddbanner.png
 ---

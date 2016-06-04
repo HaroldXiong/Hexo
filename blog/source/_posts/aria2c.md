@@ -1,7 +1,7 @@
 title: 使用aria2多线程下载
 date: 2015-12-03 23:33:33
-tags: [下载, Unix]
-categories: [＊nix, 命令]
+tags: [下载, Unix, Linux]
+categories: [奇技淫巧, ＊nix]
 photos: 
 	- /img/arbanner.png
 ---
