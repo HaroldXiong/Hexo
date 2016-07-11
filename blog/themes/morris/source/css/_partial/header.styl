@@ -7,7 +7,7 @@
     position: absolute
     left: 0
     right: 0
-    height: 40px
+    height: 128px
   &:before
     top: 0
     background: linear-gradient(rgba(0, 0, 0, 0.2), transparent)
@@ -56,8 +56,8 @@
 $logo-text
   text-decoration: none
   color: #fff
-  font-weight: 500
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 300)
+  font-weight: 60
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 255)
 
 #logo
   @extend $logo-text
@@ -76,16 +76,16 @@ $logo-text
 
 #main-nav
   float: left
-  margin-left: -15px
+  margin-left: 0px
 
 $nav-link
   float: left
   color: #fff
-  opacity: 0.6
+  opacity: 0.9
   text-decoration: none
   transition: opacity 0.2s
   display: block
-  padding: 20px 15px
+  padding: 24px 15px
   &:hover
     opacity: 1
 
@@ -96,14 +96,14 @@ $nav-link
   font-size: font-size
   width: font-size
   height: font-size
-  padding: 20px 15px
+  padding: 24px 15px
   position: relative
   cursor: pointer
 
 .main-nav-link
   @extend $nav-link
   font-weight: 300
-  letter-spacing: 1px
+  letter-spacing: 2px
   @media mq-mobile
     display: none
 
@@ -116,7 +116,7 @@ $nav-link
 
 #sub-nav
   float: right
-  margin-right: -15px
+  margin-right: 0px
 
 #nav-rss-link
   &:before

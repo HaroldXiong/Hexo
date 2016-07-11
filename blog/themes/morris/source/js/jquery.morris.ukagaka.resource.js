@@ -297,6 +297,13 @@
                 autoplay = false,
                 playlist = [
                     {
+                        title: 'HIGANBANA',
+                        artist: 'AnJu',
+                        album: '零～濡鴉ノ巫女～',
+                        cover: '',
+                        mp3: '/files/Higanbana.mp3',
+                        ogg: '/files/Higanbana.mp3'
+                    },{
                         title: '輝夜の城で踊りたい',
                         artist: 'μ\'s',
                         album: 'きっと青春が闻こえる',

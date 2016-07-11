@@ -75,12 +75,30 @@ SSH登录到VPS服务器后要使用pip安装ShadowSocks，所以先装`pip`。
 	"server_port" : 8388,
 	"local_address" : "127.0.0.1",
 	"local_port" : 1080,
-	"password" : "your_password",
+	"password" : "PASSWORD",
 	"timeout" : 300,
 	"method" : "rc4-md5"
 }
 ```
 其中`"server"`一栏之所以填`"::"`是为了同时监听IPv4/v6两个端口，因为本文的需求中我们需要双栈连接，如果VPS没有IPv6功能或仅是为了搭梯子用，这里面填写一个IPv4的地址就可以了。`"password"`栏填写自己要设置的密码。至于`"method"`加密方式一栏，主流的有`rc4-md5`和`aes-256-cfb`等等，据说前者速度快，后者更安全，可以根据个人喜好自行权衡。
+
+如果有多个用户需要使用而不想都使用一套端口和密码，可以如下写成多端口配置文件：
+
+```bash
+{
+	"server" : "::",
+	"local_address" : "127.0.0.1",
+	"local_port" : 1080,
+	"port_password":
+	{
+		"8388":"PASSWORD0",
+		"8389":"PASSWORD1",
+		"8340":"PASSWORD2"
+    },
+   	"timeout" : 300,
+	"method" : "rc4-md5"
+}
+```
 
 保存后就可以通过以下命令启动和停止ShadowSocks服务了：
 

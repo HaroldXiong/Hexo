@@ -109,7 +109,7 @@ photos:
 这时我们需要输入`ServerPasswordSet`命令设置远程管理密码，确认密码后就可以通过Windows版的`SoftEther VPN Server Manager`远程管理了。
 
 #VPN管理
-首先下载并安装[SoftEther VPN Server Manager](http://jp.softether-download.com/files/softether/v4.19-9599-beta-2015.10.19-tree/Windows/SoftEther_VPN_Server_and_VPN_Bridge/softether-vpnserver_vpnbridge-v4.19-9599-beta-2015.10.19-windows-x86_x64-intel.exe)，其实只用到了管理工具：
+首先下载并安装[SoftEther VPN Server Manager](http://softether-download.com/en.aspx)（居然最近出了Mac版），其实只用到了管理工具：
 
 ![Setup Wizard](/img/vpnsetup.png)
 

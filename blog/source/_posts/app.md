@@ -1,7 +1,7 @@
 title: 将jar程序打包成app
 date: 2016-05-20 20:00:00
-tags: [Mac OS X, Minecraft]
-categories: [奇技淫巧, OS X]
+tags: [macOS, Minecraft]
+categories: [奇技淫巧, macOS]
 photos: 
 	- /img/appbanner.png
 ---

@@ -1,6 +1,6 @@
 title: Mac上进行Verilog仿真
 date: 2016-04-11 21:11:11
-tags: [Mac OS X, Verilog]
+tags: [macOS, Verilog]
 categories: [课程, VLSI]
 photos: 
 	- /img/verilogbanner.png
