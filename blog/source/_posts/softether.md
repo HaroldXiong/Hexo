@@ -15,25 +15,27 @@ photos:
 
 #服务器端
 ##下载解压
-首先要在服务器上下载并解压安装文件，一定注意是32位还是64位。
+首先要在服务器上下载并解压安装文件，一定注意是32位还是64位（可通过`uname -a`命令查看）。
 32位系统：
 	
-	wget http://jp.softether-download.com/files/softether/v4.19-9599-beta-2015.10.19-tree/Linux/SoftEther_VPN_Server/32bit_-_Intel_x86/softether-vpnserver-v4.19-9599-beta-2015.10.19-linux-x86-32bit.tar.gz
-	tar -zxvf softether-vpnserver-v4.19-9599-beta-2015.10.19-linux-x86-32bit.tar.gz
+	wget http://jp.softether-download.com/files/softether/v4.20-9608-rtm-2016.04.17-tree/Linux/SoftEther_VPN_Server/32bit_-_Intel_x86/softether-vpnserver-v4.20-9608-rtm-2016.04.17-linux-x86-32bit.tar.gz
 	
 64位系统：
 
-	wget http://jp.softether-download.com/files/softether/v4.19-9599-beta-2015.10.19-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.19-9599-beta-2015.10.19-linux-x64-64bit.tar.gz
-	tar -zxvf softether-vpnserver-v4.19-9599-beta-2015.10.19-linux-x64-64bit.tar.gz
+	wget http://jp.softether-download.com/files/softether/v4.20-9608-rtm-2016.04.17-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.20-9608-rtm-2016.04.17-linux-x64-64bit.tar.gz
 	
 以上为截止发布本文时的最新版本，建议从[SoftEther官方网站](http://www.softether-download.com/en.aspx?product=softether)获取最新版本。
 
 ##安装启动
+先解压（建议装到`/usr/local`下）：
+	
+	tar -zxvf softether-vpnserver-*.tar.gz
+
 `cd vpnserver`进入到解压目录下并启动安装脚本`./.install.sh`：
 
 	--------------------------------------------------------------------
 
-	SoftEther VPN Server (Ver 4.19, Build 9599, Intel x86) for Linux Install Utility
+	SoftEther VPN Server (Ver 4.20, Build 9608, Intel x64 / AMD64) for Linux Install Utility
 	Copyright (c) SoftEther Project at University of Tsukuba, Japan. All Rights Reserved.
 
 	--------------------------------------------------------------------
@@ -67,13 +69,31 @@ photos:
 
 不同意就不要用了。如果提示不识别某些命令比如`gcc`，另行安装即可。如果没有异常则说明安装成功，执行`./vpnserver start`启动服务。同理`./vpnserver stop`停止服务。
 
+在CentOS7以后可以用systemd启动vpnserver，先新建启动脚本`/etc/systemd/system/vpnserver.service`：
+
+```bash
+[Unit]
+Description=SoftEther VPN Server
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/vpnserver/vpnserver start
+ExecStop=/usr/local/vpnserver/vpnserver stop
+
+[Install]
+WantedBy=multi-user.target
+```
+
+然后就可以通过`systemctl start vpnserver`启动了，并通过`systemctl enable vpnserver`设置开机自启。
+
 ##设置密码
 启动成功后我们需要设置远程登录密码以便本地管理服务。运行`./vpncmd`进入VPN的命令行：
 	
 	vpncmd command - SoftEther VPN Command Line Management Utility
 	SoftEther VPN Command Line Management Utility (vpncmd command)
-	Version 4.19 Build 9599   (English)
-	Compiled 2015/10/19 20:28:20 by yagi at pc30
+	Version 4.20 Build 9608   (English)
+	Compiled 2016/04/17 21:59:35 by yagi at pc30
 	Copyright (c) SoftEther VPN Project. All Rights Reserved.
 
 	By using vpncmd program, the following can be achieved.

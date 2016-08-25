@@ -44,7 +44,7 @@ SSH公钥可以现在添加，也可以以后再添加。之后点创建就可�
 
 成功登录后，首先要求更改root密码。如果希望以后本机登录不再输入密码，可以将本地的公钥上传到服务器端：
 
-	scp ~/.ssh/id_rsa.pub root@IP:~/.ssh/authorized_keys
+	cat ~/.ssh/id_rsa.pub | ssh root@IP 'cat >> .ssh/authorized_keys'
 
 如果本地`~/.ssh`目录下没有`id_rsa`这样的文件，可以使用`ssh-keygen`命令在该目录下生成。这样以后每次ssh连接时就不用再输密码了。
 
@@ -94,7 +94,7 @@ SSH登录到VPS服务器后要使用pip安装ShadowSocks，所以先装`pip`。
 		"8388":"PASSWORD0",
 		"8389":"PASSWORD1",
 		"8340":"PASSWORD2"
-    },
+	},
    	"timeout" : 300,
 	"method" : "rc4-md5"
 }
@@ -114,12 +114,29 @@ alias ssstart='ssserver -c /etc/shadowsocks.json --fast-open -d start'
 alias ssstop='ssserver -d stop'
 ```
 
-保存后记得使用`source ~/.bashrc`命令应用配置，这样就可以每次通过`ssstart`和`ssstop`命令启动或停止服务了。如果怕服务器重启以后懒得手动启动ss服务，也可以加到开机启动项里，编辑`/etc/rc.local`，把上面的启动命令写进去就行了。
+保存后记得使用`source ~/.bashrc`命令应用配置，这样就可以每次通过`ssstart`和`ssstop`命令启动或停止服务了。
+
+在CentOS7以后可以用systemd启动Shadowsocks，先新建启动脚本`/etc/systemd/system/shadowsocks.service`：
+
+```bash
+[Unit]
+Description=Shadowsocks
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/bin/ssserver -c /etc/shadowsocks.json
+ExecStop=/usr/bin/ssserver -d stop
+
+[Install]
+WantedBy=multi-user.target
+```
+
+然后就可以通过`systemctl start shadowsocks`启动了，并通过`systemctl enable shadowsocks`设置开机自启。
 
 ###性能优化
 现在我们要祭出TCP加速神器——**锐速**了。
 
-锐速是一款免费的TCP底层加速软件，可以便捷地完成服务器网络的优化，配合ShadowSocks效果甚好。
+~~锐速是一款免费的TCP底层加速软件~~，可以便捷地完成服务器网络的优化，配合ShadowSocks效果甚好。
 
 首先要去[锐速官网](http://www.serverspeeder.com/)注册。然后在服务器上通过以下命令下载安装：
 
@@ -141,6 +158,8 @@ gso="1"
 保存后重启服务就可以了：
 
 	service serverSpeeder restart
+	
+目前锐速不再开放使用，想用的朋友可以到[91云](https://www.91yun.org/en/serverspeeder91yun)寻找新途径。
 
 ##本地客户端
 首先确定你可以获取到IPv6地址，最简便的方法就是打开[六维空间](http://bt.neu.edu.cn/)测试一下，如果可以打开就说明没问题。

@@ -80,7 +80,7 @@ photos:
 #Root（可选）
 root权限可以通过安装SuperSU的方式获取（CM13之类的系统可以在开发者选项里直接获取）。
 
-先到[chainfire](https://chainfire.eu/)下载最新版本的SuperSU，然后进入TWRT的`ADB Sideload`模式下直接通过`adb sideload SuperSU.zip`命令刷入即可。
+先到[chainfire](https://chainfire.eu/)下载最新版本的SuperSU，然后进入TWRP的`ADB Sideload`模式下直接通过`adb sideload SuperSU.zip`命令刷入即可。
 
 #安装apk（可选）
 如果apk下载到了电脑上，无需拷贝到手机通过以下命令便可直接安装：

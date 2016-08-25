@@ -34,14 +34,21 @@ photos:
 
 ![ChinaDNS](/img/dnschinadns.png)
 
-其中的设置基本不用动，国内路由表也是现成的，主要注意`上游服务器`一项，前面的是对于国内线路的DNS服务器，默认是114基本没什么问题；但是后一个DNS服务器则要求没有污染，默认用的Google的，感觉直接作为DNS不会太理想，所以需要自己在VPS上搭建一个简易的DNS服务器。
+其中的设置基本不用动，国内路由表在`/etc/chinadns_chnroute.txt`，最好设置成定期更新，可以在计划任务中添加`crontab`任务：
+
+	0 4 * * * wget -O- 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' | grep ipv4 | grep CN | awk -F\| '{ printf("%s/%d\n", $4, 32-log($5)/log(2)) }' > /etc/chinadns_chnroute.txt
+	
+这样每天凌晨4点就可以将新的路由表文件写入了。
+
+还有`上游服务器`一项，前面的是对于国内线路的DNS服务器，默认是114基本没什么问题；但是后一个DNS服务器则要求没有污染，默认用的Google的，感觉直接作为DNS不会太理想，所以需要自己在VPS上搭建一个简易的DNS服务器。
 
 简单来说，使用`dnsmasq`比较方便，所以登入VPS服务器，安装dnsmasq并加入开机启动：
 
 	yum install dnsmasq
-	sudo systemctl enable dnsmasq
+	systemctl enable dnsmasq
 
 然后编辑配置文件`/etc/dnsmasq.conf`（因为所有内容都注释掉了，所以直接加入下面几行就可以了）：
+
 ```bash
 port=5353
 server=8.8.8.8
@@ -49,10 +56,6 @@ server=8.8.4.4
 ```
 
 保存后运行`dnsmasq`就监听到5353端口了，这样就可以间接地使用Google的DNS了。
-
-为了让dnsmasq运行稳定，可以设置`crontab`定时任务。用`crontab e`命令编辑计划任务文件，将下列语句添加进去（设置为每3小时重启一次）：
-
-	* */3 * * * systemctl restart dnsmasq
 
 回到路由器方面，将`上游服务器`的后一项改为`VPS_ip:5353`保存就可以了。
 
