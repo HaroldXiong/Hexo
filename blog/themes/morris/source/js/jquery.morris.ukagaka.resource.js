@@ -46,7 +46,7 @@
                 menuCancelText = o.menuCancelText,
                 menuSubmitText = o.menuSubmitText,
                 menuQueryText = o.menuQueryText;
-            ukagakaText = o.ukagakaText;
+                ukagakaText = o.ukagakaText;
 
             var footerMenuHTML = "";
             footerMenuHTML += "<div id='ukagaka_controlpanel'><ul>";
@@ -197,10 +197,10 @@
                 menuQueryText = o.menuQueryText;
 
             $("#ukagaka_usertalk").hide();
-            if (navigator.userAgent.match(/Android|iPhone|iPad/i)) {
+            if (navigator.userAgent.match(/Android|iPhone/i)) {
                 $("#playblock").hide();
-                $(".ukagaka_img").hide();
                 $(".ukagaka_box").hide();
+                $(".ukagaka_img").hide();
             } else {
                 $(window).load(function() {
                     var talk_timer = setInterval(talkingbox, o.talkTime);
@@ -240,7 +240,7 @@
                 alert('AIML 入口，正在永久推遲建造 ...');
             }).on('click', "#ukagaka_btn_music", function(event) {
                 // $("#ukagaka_usertalk").toggle('slide', null, 500)
-                $("#playblock").toggle('slide', null, 500);
+                $("#playblock").toggle('slide', {direction:"right"}, null, 500);
             }).on('click', "#ukagaka_btn_up", function(event) {
                 $("html,body").animate({
                     scrollTop: 0
@@ -266,7 +266,7 @@
             }).on('click', "#ukagaka_btn_refresh", function(event) {
                 $(".ukagaka_img").attr("src", options.imgs[Math.floor(Math.random() * options.imgs.length)]);
             }).on('click', "#ukagaka_btn_power", function(event) {
-                $(".chat-box-content, .ukagaka_img").toggle();
+                $(".ukagaka_img, .ukagaka_box, #playblock").toggle('slide', {direction:"right"}, null, 500);
             });
         }
 
@@ -554,45 +554,45 @@
         googleSheetField: "entry.1522432738",
         talkTime: 60000,
 
-        ukagakaText: "舰娘",
+        ukagakaText: "咱",
         loadingText: '貌似被墙了呢.^100.^100.',
         learnPlaceholder: "被墙了还怎么学习？",
-        menuMainText: "使用選單功能&#65292; 不是钦点！",
+        menuMainText: "使用选项&#65292; 不是钦点！",
         menuLearnText: "$ 学习一个",
         menuLogText: "$ 大新闻",
-        menuExitText: "$ 結束",
+        menuExitText: "$ 返回",
         menuCancelText: "$ 取消",
-        menuSubmitText: "$ 確認",
+        menuSubmitText: "$ 确认",
         menuQueryText: "提高姿势水平<br/>",
         logText: "Shintaku 修正<br/>找尋 AI 系統<br/>谈笑风生<br/>",
         imgs: [ 
-                '/images/muse/nozomi3.jpg',
-                '/images/muse/nozomi2.jpg',
-                '/images/muse/nozomi1.jpg',
-                '/images/muse/eri1.jpg',
-                '/images/muse/eri2.jpg',
-                '/images/muse/eri3.jpg',
-                '/images/muse/hanayo1.jpg',
-                '/images/muse/hanayo2.jpg',
-                '/images/muse/hanayo3.jpg',
-                '/images/muse/honoka1.jpg',
-                '/images/muse/honoka2.jpg',
-                '/images/muse/honoka3.jpg',
-                '/images/muse/kotori1.jpg',
-                '/images/muse/kotori2.jpg',
-                '/images/muse/kotori3.jpg',
-                '/images/muse/maki1.jpg',
-                '/images/muse/maki2.jpg',
-                '/images/muse/maki3.jpg',
-                '/images/muse/nico1.jpg',
-                '/images/muse/nico2.jpg',
-                '/images/muse/nico3.jpg',
-                '/images/muse/rin1.jpg',
-                '/images/muse/rin2.jpg',
-                '/images/muse/rin3.jpg',
-                '/images/muse/umi1.jpg',
-                '/images/muse/umi2.jpg',
-                '/images/muse/umi3.jpg'
+                '/images/lovelive/nozomi3.png',
+                '/images/lovelive/nozomi2.png',
+                '/images/lovelive/nozomi1.png',
+                '/images/lovelive/eri1.png',
+                '/images/lovelive/eri2.png',
+                '/images/lovelive/eri3.png',
+                '/images/lovelive/hanayo1.png',
+                '/images/lovelive/hanayo2.png',
+                '/images/lovelive/hanayo3.png',
+                '/images/lovelive/honoka1.png',
+                '/images/lovelive/honoka2.png',
+                '/images/lovelive/honoka3.png',
+                '/images/lovelive/kotori1.png',
+                '/images/lovelive/kotori2.png',
+                '/images/lovelive/kotori3.png',
+                '/images/lovelive/maki1.png',
+                '/images/lovelive/maki2.png',
+                '/images/lovelive/maki3.png',
+                '/images/lovelive/nico1.png',
+                '/images/lovelive/nico2.png',
+                '/images/lovelive/nico3.png',
+                '/images/lovelive/rin1.png',
+                '/images/lovelive/rin2.png',
+                '/images/lovelive/rin3.png',
+                '/images/lovelive/umi1.png',
+                '/images/lovelive/umi2.png',
+                '/images/lovelive/umi3.png'
                 /*'/images/kancolle/no.10 Shimakaze 岛風 中破.png',
                 '/images/kancolle/no.10 Shimakaze 岛風 立绘.png',
                 '/images/kancolle/no.1 Nagato 長門 中破.png',

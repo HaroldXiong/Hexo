@@ -71,7 +71,7 @@ photos:
 
 在CentOS7以后可以用systemd启动vpnserver，先新建启动脚本`/etc/systemd/system/vpnserver.service`：
 
-```bash
+```ini
 [Unit]
 Description=SoftEther VPN Server
 After=network.target
@@ -129,7 +129,7 @@ WantedBy=multi-user.target
 这时我们需要输入`ServerPasswordSet`命令设置远程管理密码，确认密码后就可以通过Windows版的`SoftEther VPN Server Manager`远程管理了。
 
 #VPN管理
-首先下载并安装[SoftEther VPN Server Manager](http://softether-download.com/en.aspx)（居然最近出了Mac版），其实只用到了管理工具：
+首先下载并安装[SoftEther VPN Server Manager](http://softether-download.com/en.aspx)（居然最近移植了Mac版），其实只用到了管理工具：
 
 ![Setup Wizard](/img/vpnsetup.png)
 

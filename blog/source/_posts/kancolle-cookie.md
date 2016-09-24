@@ -1,6 +1,6 @@
 title: 舰娘更改cookie直接连接
 date: 2016-02-29 22:22:22
-tags: [舰娘, 代理]
+tags: [舰队Collection, 游戏]
 categories: [ACG, 艦隊これくしょん]
 photos: 
 	- /img/kcbanner.png

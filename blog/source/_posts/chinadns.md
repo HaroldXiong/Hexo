@@ -49,10 +49,10 @@ photos:
 
 然后编辑配置文件`/etc/dnsmasq.conf`（因为所有内容都注释掉了，所以直接加入下面几行就可以了）：
 
-```bash
-port=5353
-server=8.8.8.8
-server=8.8.4.4
+```ini
+port = 5353
+server = 8.8.8.8
+server = 8.8.4.4
 ```
 
 保存后运行`dnsmasq`就监听到5353端口了，这样就可以间接地使用Google的DNS了。

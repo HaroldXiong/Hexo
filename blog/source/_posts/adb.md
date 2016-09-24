@@ -59,7 +59,7 @@ photos:
 如果想要装上Google全家桶，在刷完ROM后先不要急于重启。先到[OpenGAPPS](http://opengapps.org/)下载对应版本的GAPPS到电脑上（注意Platform和Android版本），不同Variant区别在于：
 
 | Variant | Description |
-|-|-|
+|---|---|
 | aroma | 图形化界面的super版，可以选择安装GAPPS |
 | super | 包含Google设备的所有Google Apps |
 | stock | 包含最新Nexus机型上预装的应用，并以GAPPS替换AOSP的同类应用 |

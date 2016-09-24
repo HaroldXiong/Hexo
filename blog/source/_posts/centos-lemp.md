@@ -1,6 +1,6 @@
 title: CentOS 7配置LEMP环境
 date: 2016-03-21 21:11:11
-tags: [Linux, LEMP, VPS]
+tags: [Linux, LEMP, VPS, Nginx, MySQL, PHP, 服务器]
 categories: [网络, 网站部署]
 photos: 
 	- /img/lempbanner.png
@@ -48,7 +48,7 @@ yum默认安装的PHP还是5.4版本，对于需要新版本特性的用户还�
 	
 然后编辑`/etc/yum.repos.d/remi.repo`文件：
 
-```bash
+```ini
 [remi]
 name=Remi's RPM repository for Enterprise Linux 7 - $basearch
 #baseurl=http://rpms.remirepo.net/enterprise/7/remi/$basearch/
@@ -60,7 +60,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
 请确保`[remi]`中的`enabled`的值是`1`。然后向下查看，在想要安装的php的版本（`[remi-php55]`或`[remi-php56]`）一段将对应的`enabled`的值改为`1`，例如：
 
-```bash
+```ini
 [remi-php55]
 name=Remi's PHP 5.5 RPM repository for Enterprise Linux 7 - $basearch
 #baseurl=http://rpms.remirepo.net/enterprise/7/php55/$basearch/
@@ -115,7 +115,7 @@ include /etc/nginx/conf.d/*.conf;
 
 编辑`/etc/nginx/conf.d/default.conf`文件（若不存在请新建，以后就可以在这里修改配置了）：
 
-```bash
+```sh
 server {
     listen       80;
     server_name  your_domain;
@@ -175,7 +175,7 @@ server {
 #配置Nginx和PHP
 继续编辑`/etc/nginx/conf.d/default.conf`文件，将`location ~ \.php$`一段解注释，并改成如下样子：
 
-```bash
+```sh
     location ~ \.php$ {
         root   /usr/share/nginx/html;
         fastcgi_pass   127.0.0.1:9000;
@@ -189,7 +189,7 @@ server {
 
 再编辑`/etc/php-php.d/www.conf`将`user`和`group`的值改为`nginx`（默认应该是`apache`）：
 
-```bash
+```sh
 user = nginx
 group = nginx
 ```

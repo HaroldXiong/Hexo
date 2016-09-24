@@ -16,9 +16,9 @@ photos:
 于是现在亟待解决的问题就是如何能够找到所有所需依赖并能够将其打包引用。
 
 #查找依赖工具
-通过阅读[官方文档](http://doc.qt.io/qt-5/windows-deployment.html#application-dependencies)发现，Qt里面内置了一个dll依赖性检查工具——`windeploy.exe`。这个程序应当在`~/Qt/Qt5.5.0/5.5/mingw492_32/bin/`下，通过命令提示符执行它可以得到`使用方法×1`：
+通过阅读[官方文档](http://doc.qt.io/qt-5/windows-deployment.html#application-dependencies)发现，Qt里面内置了一个dll依赖性检查工具——`windeploy.exe`。这个程序应当在`~/Qt/Qt5.5.0/5.5/mingw492_32/bin/`下，通过命令提示符执行它可以得到使用方法：
 
-C:\Users\Shintaku>C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe
+	C:\Users\Shintaku>C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe
     Please specify the binary or folder.
 
     Usage: C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\windeployqt.exe [options] [files]

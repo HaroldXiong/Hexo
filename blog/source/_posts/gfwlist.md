@@ -3,12 +3,10 @@ date: 2016-08-06 18:18:18
 tags: [GFWlist, ShadowSocks, OpenWrt, 科学上网, 路由器, Linux]
 categories: [网络, 科学上网]
 photos:
-	- http://s09.flagcounter.com/count2/T2RV/bg_FFFFFF/txt_000000/border_CCCCCC/columns_6/maxflags_20/viewers_GFWList/labels_1/pageviews_1/flags_0/percent_0/
+	- https://s09.flagcounter.com/count2/T2RV/bg_000000/txt_FFFFFF/border_000000/columns_8/maxflags_20/viewers_GFWList/labels_1/pageviews_0/flags_0/percent_0/
 ---
 
-前两个月一直使用[ChinaDNS+ShadowSocks](https://www.shintaku.cc/2016/06/01/chinadns/)的方式按IP切换代理，但是由于长城宽带非常蛋疼代理时常上不去，导致平时可以正常访问的一些网站也无法访问，得不偿失。于是趁这周换了移动光纤，为了避免发生之前的情况，也把代理方式换成了按GFWlist得域名切换。
-
-在搞透明代理之前请确保路由器已经安刷好了OpenWrt。具体怎么刷OpenWrt请参见我之前的一篇博文[OpenWrt路由器的网络代理](https://www.shintaku.cc/2015/12/12/openwrt/)。
+前两个月OpenWrt一直使用[ChinaDNS+ShadowSocks](https://www.shintaku.cc/2016/06/01/chinadns/)的方式按IP切换代理，但是由于长城宽带非常蛋疼代理时常上不去，导致平时可以正常访问的一些网站也无法访问，得不偿失。于是趁这周换了移动光纤，为了避免发生之前的情况，也把代理方式换成了按[GFWlist](https://github.com/gfwlist/gfwlist)得域名切换。
 
 #必要软件
 首先是在OpenWrt下装上一堆必要软件：
@@ -30,7 +28,7 @@ photos:
 #配置ShadowSocks
 编辑`/etc/shadowsocks.json`文件：
 
-```bash
+```json
 {
     "server": "",
     "server_port": 8388,
@@ -74,7 +72,7 @@ stop() {
 	
 #配置dnsmasq
 
-新建目录`/etc/dnsmasq.d`，并在其中放入`dnsmasq_list.conf`文件，这个文件就是根据GFWlist生成的走代理的域名列表，生成方法已经有大神放在了[GitHub](https://github.com/cokebar/gfwlist2dnsmasq)上，可根据自己的情况进行修改。若是懒得生成，我在服务器上也会[每日更新](http://info.shintaku.cc/dnsmasq_list.txt)，里面用的DNS是在这台服务器上搭的dnsmasq，ipset表叫做`gfwlist`。
+新建目录`/etc/dnsmasq.d`，并在其中放入`dnsmasq_list.conf`文件，这个文件就是根据GFWlist生成的走代理的域名列表，生成方法已经有大神放在了[GitHub](https://github.com/cokebar/gfwlist2dnsmasq)上，可根据自己的情况进行修改。若是懒得生成，我在服务器上也会每日更新[dnsmasq_list.conf](http://info.shintaku.cc/dnsmasq_list.conf)，里面用的DNS是在这台服务器上搭的dnsmasq，ipset表叫做`gfwlist`。
 
 建议使用自己VPS上的DNS，具体就是在服务器装上dnsmasq，编辑`/etc/dnsmasq.conf`加入：
 

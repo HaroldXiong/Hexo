@@ -20,6 +20,8 @@ widgets:
 - recent_posts
 - tagcloud
 - links
+- statistics
+- adsense
 - ukagaka
 
 # Miscellaneous
@@ -40,7 +42,7 @@ toc:
   aside: true     ## show contents in aside.
 
 ## social
-facebook_url: https://www.facebook.com/profile.php?id=100005630052910
+facebook_url: https://www.facebook.com/100005630052910
 github_url: https://github.com/liangzhenduo0608
 google_plus_url: https://plus.google.com/114761524022260759157
 twitter_url: https://twitter.com/liangzhenduo

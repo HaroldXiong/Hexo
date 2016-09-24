@@ -1,6 +1,6 @@
 title: OpenWrt路由器的网络代理
 date: 2015-12-12 12:12:12
-tags: [ShadowSocks, OpenWrt, 科学上网, 路由器, Linux]
+tags: [ShadowSocks, OpenWrt, 科学上网, 路由器, Linux, ssh]
 categories: [网络, 科学上网]
 photos:
 	- /img/opbanner.png
@@ -93,10 +93,6 @@ OpenWrt归根结底还是一个**Linux发行版**，所以Linux命令在这里�
 我们还是通过SSH登录：
 
 	ssh root@192.168.1.1
-
-如果想要免密登录，可以先将公钥传上去：
-
-	cat ~/.ssh/id_rsa.pub | ssh root@192.168.1.1 'cat >> /etc/dropbear/authorized_keys'
 	
 输入之前设置的密码后，就会看到OpenWrt特有的终端界面：
 
@@ -153,7 +149,7 @@ OpenWrt归根结底还是一个**Linux发行版**，所以Linux命令在这里�
 	
 安装完成之后编辑`/etc/config/6relayd`文件在默认配置后面加一组：
 
-```bash
+```sh
 config relay
 	option master   'wan'
 	option network  'lan'

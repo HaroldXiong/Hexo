@@ -1,6 +1,6 @@
 title: Linux上搭建Minecraft服务器
 date: 2016-02-14 21:11:11
-tags: [Linux, Minecraft, 服务器]
+tags: [Linux, Minecraft, 服务器, 游戏]
 categories: [ACG, Minecraft]
 photos: 
 	- /img/mcbanner.png
@@ -41,7 +41,7 @@ Minecraft是基于Java运行的，所以首先要安装Java环境：
 	
 然后编辑`server.properties`，开始里面应除了一些注释没有其他内容，将以下内容加进去：
 
-```bash
+```ini
 generator-settings=                 #用于设置超平坦世界的函数，留空即可
 op-permission-level=4               #设置OP的许可权等级
 allow-nether=true                   #是否允许生成/进入下界

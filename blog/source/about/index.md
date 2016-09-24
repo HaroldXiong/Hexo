@@ -14,7 +14,7 @@ toc: false
 
 + 熟练使用**Linux / OS X**平台进行开发
 + 熟悉**C++ / Java**等高级语言
-+ 有一定的**Web**开发经验
++ 有一定的**PHP**开发经验
 + 熟练使用**MySQL**数据库
 + 对**Shell**和**Python**有一定的了解
 
@@ -53,7 +53,7 @@ toc: false
 ##获奖经历
 
 |<div style="text-align:center">时间</div>|<div style="text-align:center">竞赛名称</div>|<div style="text-align:center">奖项</div>|
-|-|-|-|
+|---|---|---|
 |<div style="text-align:center">Nov 2015|<div style="text-align:center">2015 ACM-ICPC Asia Regional Contest @Shanghai |<div style="text-align:center">**荣誉提名** |
 |<div style="text-align:center">Sep 2015|<div style="text-align:center">全国大学生数学建模竞赛天津赛区                     |<div style="text-align:center">**一等奖**             |
 |<div style="text-align:center">Jun 2015|<div style="text-align:center">“美团杯”天津大学程序设计挑战赛                     |<div style="text-align:center">**三等奖**             |
@@ -73,7 +73,7 @@ toc: false
 
 + Familiar with **Linux / OS X** Development Environment
 + Known **C++ / Java** well
-+ Experienced **Web Development**
++ Experienced **PHP Development**
 + Skilled use **MySQL Database**
 + Understood **Shell / Python**
 
@@ -107,7 +107,7 @@ toc: false
 ##Awards
 
 |<div style="text-align:center">PERIOD</div>|<div style="text-align:center">CONTEST</div>|<div style="text-align:center">AWARD</div>|
-|-|-|-|
+|---|---|---|
 |<div style="text-align:center">2015.11|<div style="text-align:center">2015 ACM-ICPC Asia Regional Contest @Shanghai |<div style="text-align:center">**Honorable Mention** |
 |<div style="text-align:center">2015.09|<div style="text-align:center">2015 China Undergraduate Mathematical Contest in Modeling                     |<div style="text-align:center">**1st Prize**             |
 |<div style="text-align:center">2015.06|<div style="text-align:center">'Meituan Cup' Programing Challenge Contest                     |<div style="text-align:center">**3rd Prize**             |

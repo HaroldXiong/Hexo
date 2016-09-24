@@ -20,7 +20,7 @@ photos:
 	
 然后编辑它：
 
-```bash
+```ini
 # Basic Options
 dir=/Users/$USER/Downloads
 input-file=/Users/$USER/.aria2/session.dat

@@ -86,7 +86,7 @@ GoAgent的项目主页已经从[Google Code](https://code.google.com/p/goagent/)
 ##配置proxy.ini
 这一步做的就是上一步终端中最后一行说的，修改`/local/proxy.ini`中`gae`下的`appid`和`password`并保存：
 
-```bash
+```ini
 [gae]
 enable = 1
 appid = your_appid

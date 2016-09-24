@@ -1,6 +1,6 @@
 title: SSL证书的申请与配置
 date: 2015-12-30 23:33:33
-tags: [服务器, 网站, VPS]
+tags: [服务器, SSL, VPS, Nginx]
 categories: [网络, 网站部署]
 photos:
 	- /img/sslbanner.png
@@ -46,13 +46,13 @@ photos:
 ##上传证书
 解压后里面有一个`.crt`文件和一个`.key`文件，将它们上传到服务器上：
 
-	scp 1_your_domain_bundle.crt root@your_ip:/usr/share/nginx/
-	scp 2_your_domain.key root@your_ip:/usr/share/nginx/
+	scp 1_your_domain_bundle.crt remote_username@remote_host:/usr/share/nginx/
+	scp 2_your_domain.key remote_username@remote_host:/usr/share/nginx/
 	
 ##监听端口
 一般HTTPS使用443端口，因此要编辑`/etc/nginx/conf.d`下的`ssl.conf`文件：
 
-```bash
+```sh
 server {
     listen       443;
     server_name  your_domain;
@@ -81,7 +81,7 @@ server {
 
 所以还要编辑`/etc/nginx/conf.d`下的`default.conf`文件：
 
-```bash
+```sh
 server {
     listen       80 default_server;
     server_name  your_domain;

@@ -35,7 +35,7 @@ Scansion是Mac平台下的一个VCD文件查看工具，可以去[http://www.log
 #编译仿真
 随便新建一个测试文件叫test.v：
 
-```v
+```verilog
 module vaddsws( vra, vrb, vrt, sat );
 
 input  [31 : 0] vra;
@@ -55,7 +55,7 @@ endmodule
 
 再对其新建testbench文件test_tb.v：
 
-```v
+```verilog
 `timescale 1ns/100ps
 `include "test.v"
 
